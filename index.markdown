@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<h2 id="intro">Introduction</h2>
+<h2 id="intro">Introduktion</h2>
 
 In this tiny ebook I'm going to show you how to get started writing 6502
 assembly language. The 6502 processor was massive in the seventies and
