@@ -15,11 +15,11 @@ Allvarligt talat, jag tycker det är värdefullt att ha en förståelse för ass
 Varför 6502? Varför inte ett *användbart* assemblerspråk, som [x86](http://en.wikipedia.org/wiki/X86)? Tja, jag tror inte att lära x86 är användbart. Jag tror inte att du någonsin kommer att behöva skriva assembler i ditt vanliga jobb - det är enbart en akademisk övning, något att utöka ditt sinne och ditt tänkande med. 6502 skrevs ursprungligen i en annan tid, en tid då de flesta av utvecklarna skrev assembler direkt, i stället för i dessa nymodiga högnivåprogrammeringsspråk. Så de var konstruerade för att skrivas av människor. Mer moderna assemblerspråk är tänkta att skrivas av kompilatorer, så låt oss lämna det till dem. Dessutom är 6502 *kul*. Ingen har någonsin kallat x86 *kul*.
 
 
-<h2 id="first-program">Our first program</h2>
+<h2 id="first-program">Vårt första program</h2>
 
-So, let's dive in! That thing below is a little [JavaScript 6502 assembler and
-simulator](https://github.com/skilldrick/6502js) that I adapted for this book.
-Click **Assemble** then **Run** to assemble and run the snippet of assembly language.
+Låt oss dyka i! Den saken här nedan är en liten [JavaScript 6502-assemblator och 
+-simulator/emulator](https://github.com/skilldrick/6502js) som jag anpassade för denna bok. 
+Klicka **Assemble** och sedan **Run** att assemblera och köra snutten med assemblerkod. 
 
 {% include start.html %}
 LDA #$01
@@ -30,44 +30,39 @@ LDA #$08
 STA $0202
 {% include end.html %}
 
-Hopefully the black area on the right now has three coloured "pixels" at the
-top left. (If this doesn't work, you'll probably need to upgrade your browser to
-something more modern, like Chrome or Firefox.)
+Förhoppningsvis har det svarta området till höger nu tre färgade "pixlar" 
+uppe till vänster. (Om detta inte fungerar, behöver du förmodligen uppgradera din webbläsare till
+en mer modern, som Chrome eller Firefox.) 
 
-So, what's this program actually doing? Let's step through it with the
-debugger. Hit **Reset**, then check the **Debugger** checkbox to start the
-debugger. Click **Step** once. If you were watching carefully, you'll have
-noticed that `A=` changed from `$00` to `$01`, and `PC=` changed from `$0600` to
+Alltså, vad gör det här programmet egentligen? Låt oss gå igenom den med 
+debuggern. Klicka **Reset**, kryssa sedan i **Debugger** kryssrutan för att starta 
+debuggern. Klicka **Step** en gång. Om du tittade noga, bör du ha 
+märkt att `A=` ändras från `$00` till `$01` och `PC=` ändras från `$0600` till 
 `$0602`.
 
-Any numbers prefixed with `$` in 6502 assembly language (and by extension, in
-this book) are in hexadecimal (hex) format. If you're not familiar with hex
-numbers, I recommend you read [the Wikipedia
-article](http://en.wikipedia.org/wiki/Hexadecimal). Anything prefixed with `#`
-is a literal number value. Any other number refers to a memory location.
+Alla tal med prefixet `$` i 6502-assembler (och, i förlängningen, i
+denna bok) är i hexadecimalt (hex) format. Om du inte är bekant med hex-tal, rekommenderar jag att du läser [Wikipedia
+artikeln](http://en.wikipedia.org/wiki/Hexadecimal). Allt som har `#` som prefix
+är verkliga, konkreta tal (`#` är i detta sammanhang den amerikanska mostvarigheten till förkortningen *no*, d.v.s. numero). Alla andra tal (d.v.s. utan `#`) hänvisar till en minnesplats (d.v.s. en adress).
 
-Equipped with that knowledge, you should be able to see that the instruction
-`LDA #$01` loads the hex value `$01` into register `A`. I'll go into more
-detail on registers in the next section.
+Utrustad med den kunskapen, bör du kunna inse att instruktionen
+`LDA #$01` laddar hextalet `$01` i register `A` (LoaD A med talet `$01`). Jag ska gå in mer
+i detalj på register i nästa avsnitt.
 
-Press **Step** again to execute the second instruction. The top-left pixel of
-the simulator display should now be white. This simulator uses the memory
-locations `$0200` to `$05ff` to draw pixels on its display. The values `$00` to
-`$0f` represent 16 different colours (`$00` is black and `$01` is white), so
-storing the value `$01` at memory location `$0200` draws a white pixel at the
-top left corner. This is simpler than how an actual computer would output
-video, but it'll do for now.
+Klicka **Step** igen för att exekvera (d.v.s. utföra) den andra instruktionen. Den övre vänstra pixeln i
+simulatorns display bör nu vara vit. Denna simulator använder minnesadresserna `$0200` till `$05ff` för att rita pixlar på sin skärm. Värdena `$00` till
+`$0f` representerar 16 olika färger (`$00` är svart och `$01` är vit). Att lagra värdet `$01` på adress `$0200` ritar en vit pixel i
+övre vänstra hörnet. Detta är enklare än hur en verklig dator skulle lagra data i grafikminnet, men det får duga tills vidare.
 
-So, the instruction `STA $0200` stores the value of the `A` register to memory
-location `$0200`. Click **Step** four more times to execute the rest of the
-instructions, keeping an eye on the `A` register as it changes.
+Alltså, instruktionen `STA $0200` lagrar värdet för `A`-registret i minnesaddressen
+`$0200` (STore A i adressen `$0200`). Klicka **Step** ytterligare fyra gånger för att utföra resten av
+instruktionerna, och håll ett öga på `A`-registret, ty det ändrar sig.
 
-###Exercises###
+###Övningar###
 
-1. Try changing the colour of the three pixels.
-2. Change one of the pixels to draw at the bottom-right corner (memory location `$05ff`).
-3. Add more instructions to draw extra pixels.
-
+1. Försök att ändra färgen på de tre pixlarna. 
+2. Ändra en av bildpunkterna (d.v.s. pixlarna) så att den ritas i det nedre högra hörnet (adress `$05ff`).
+3. Lägg till fler instruktioner för att rita in extra bildpunkter på olika positioner med olika färger.
 
 <h2 id='registers'>Registers and flags</h2>
 
