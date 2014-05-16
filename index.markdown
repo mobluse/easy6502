@@ -66,49 +66,27 @@ instruktionerna, och håll ett öga på `A`-registret, ty det ändrar sig.
 
 <h2 id='registers'>Register och flaggor</h2>
 
-We've already had a little look at the processor status section (the bit with
-`A`, `PC` etc.), but what does it all mean?
+Vi har redan tittat lite på processorstatusavdelningen (avdelningen med
+`A`, `PC` m.fl.), men vad betyder allt detta?
 
-The first line shows the `A`, `X` and `Y` registers (`A` is often called the
-"accumulator"). Each register holds a single byte. Most operations work on the
-contents of these registers.
+Den första raden visar `A`-, `X`- och `Y`-registren (`A` kallas ofta
+"ackumulatorn"). Varje register innehåller en enda byte. De flesta operationerna arbetar på
+innehållet i dessa register.
 
-`SP` is the stack pointer. I won't get into the stack yet, but basically this
-register is decremented every time a byte is pushed onto the stack, and
-incremented when a byte is popped off the stack.
+'SP' är stackpekaren. Jag kommer inte gå igenom stacken ännu, men i grund och botten minskas detta
+registrer varje gång en byte läggs på stacken, och
+ökas när en byte plockas upp från stacken.
 
-`PC` is the program counter - it's how the processor knows at what point in the
-program it currently is. It's like the current line number of an executing
-script. In the JavaScript simulator the code is assembled starting at memory
-location `$0600`, so `PC` always starts there.
+`PC` är programräknaren - det är så processorn vet vid vilken punkt i
+programmet den är just nu. Det är som den aktuella raden i ett körande
+skript. I JavaScript-simulatorn assembleras koden med början på minnesadress `$0600`, så `PC` börjar alltid där.
 
-The last section shows the processor flags. Each flag is one bit, so all seven
-flags live in a single byte. The flags are set by the processor to give
-information about the previous instruction. More on that later. [Read more
-about the registers and flags here](http://www.obelisk.demon.co.uk/6502/registers.html).
+Den sista delen visar processorflaggor. Varje flagga är en bit, så alla sju
+flaggor lever i en enda byte. Flaggorna ställs in av processorn för att ge
+information om den föregående instruktionen. Mer om det senare. [Läs mer
+om register och flaggor här](http://www.obelisk.demon.co.uk/6502/registers.html).
 
-Vi har redan haft en liten titt på avsnittet processorstatus( biten med
-` A ` , ` PC ` etc. ) , men vad betyder allt detta ?
-
-Den första raden visar ` A ` , ` X ` och ` Y ` register ( ` A` kallas ofta
-" ackumulator " ) . Varje register innehåller en enda byte . De flesta verksamheter arbetar på
-Innehållet i dessa register .
-
-' SP ' är stackpekaren . Jag kommer inte komma in i stacken ännu , men i grund och botten detta
-registrera dekrementeras varje gång en byte skjuts på stacken, och
-ökas när ett byte dök upp i stacken .
-
-` PC ` är programräknaren - det är hur processorn vet vid vilken tidpunkt i
-program den för närvarande är . Det är som den aktuella raden antalet en verkställande
-script . I JavaScript- simulatorn koden monteras med början på minnet
-plats ` $ 0600 ` , så ` PC ` alltid börjar där.
-
-Det sista avsnittet visas processorflaggor. Varje flagga är en bit , så alla sju
-flaggor lever i en enda byte . Flaggorna ställs in av processorn för att ge
-information om tidigare instruktion . Mer om det senare . [ Läs mer
-om register och flaggor här ] ( http://www.obelisk.demon.co.uk/6502/registers.html ) .
-
-<h2 id='instructions'>Instructions</h2>
+<h2 id='instructions'>Instruktioner</h2>
 
 Instructions in assembly language are like a small set of predefined functions.
 All instructions take zero or one arguments. Here's some annotated
