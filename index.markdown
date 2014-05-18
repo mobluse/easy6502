@@ -113,40 +113,15 @@ vet.
 
 I simulatorn nedan **skriv in** (inte klistra in) följande kod:
 
-    LDA #$80
-    STA $01
-    ADC $01
+    LDA #$80
+    STA $01
+    ADC $01
 
 {% include widget.html %}
 
 En viktig sak att notera här är skillnaden mellan `ADC #$01` och
 `ADC $01`. Den första adderar värdet `$01` till `A`-registret, men den
 andra adderar värdet lagrat på minnesplats `$01` till `A`-registret.
-
-Assemble, check the **Monitor** checkbox, then step through these three
-instructions. The monitor shows a section of memory, and can be helpful to
-visualise the execution of programs. `STA $01` stores the value of the `A`
-register at memory location `$01`, and `ADC $01` adds the value stored at the
-memory location `$01` to the `A` register. `$80 + $80` should equal `$100`, but
-because this is bigger than a byte, the `A` register is set to `$00` and the
-carry flag is set. As well as this though, the zero flag is set. The zero flag
-is set by all instructions where the result is zero.
-
-A full list of the 6502 instruction set is [available
-here](http://www.6502.org/tutorials/6502opcodes.html) and
-[here](http://www.obelisk.demon.co.uk/6502/reference.html) (I usually refer to
-both pages as they have their strengths and weaknesses). These pages detail the
-arguments to each instruction, which registers they use, and which flags they
-set. They are your bible.
-
-###Exercises###
-
-1. You've seen `TAX`. You can probably guess what `TAY`, `TXA` and `TYA` do,
-   but write some code to test your assumptions.
-2. Rewrite the first example in this section to use the `Y` register instead of
-   the `X` register.
-3. The opposite of `ADC` is `SBC` (subtract with carry). Write a program that
-   uses this instruction.
 
 Assemblera, kryssa i **Monitor**-kryssrutan, stega sedan igenom dessa tre
 instruktioner. Monitorn visar en del av minnet, och kan vara till hjälp för att
