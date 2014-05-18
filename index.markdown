@@ -88,40 +88,40 @@ om register och flaggor här](http://www.obelisk.demon.co.uk/6502/registers.html
 
 <h2 id='instructions'>Instruktioner</h2>
 
-Instructions in assembly language are like a small set of predefined functions.
-All instructions take zero or one arguments. Here's some annotated
-source code to introduce a few different instructions:
+Instruktionerna i assembler är som en liten uppsättning fördefinierade funktioner.
+Alla instruktioner tar noll eller ett argument. Här är några kommenterade
+källkoder för att introducera några olika instruktioner:
 
 {% include start.html %}
-LDA #$c0  ;Load the hex value $c0 into the A register
-TAX       ;Transfer the value in the A register to X
-INX       ;Increment the value in the X register
-ADC #$c4  ;Add the hex value $c4 to the A register
-BRK       ;Break - we're done
+LDA #$c0  ;Ladda hex värde c0 in i A-registret
+TAX       ;Transferera (d.v.s. överför) värdet i A till X
+INX       ;Inkrementera (d.v.s. öka) värdet i X-registret
+ADC #$c4  ;Addera hexvärde c4 till A-registret
+BRK       ;Break - vi är klara
 {% include end.html %}
 
-Assemble the code, then turn on the debugger and step through the code, watching
-the `A` and `X` registers. Something slightly odd happens on the line `ADC #$c4`.
-You might expect that adding `$c4` to `$c0` would give `$184`, but this
-processor gives the result as `$84`. What's up with that?
+Assemblera koden, slå sedan på debuggern och stega igenom koden, titta
+då på `A`- och `X`-registret. Något lite underligt händer på raden `ADC #$c4`.
+Du förväntade dig kanske att lägga till `$c4` till `$c0` skulle ge `$184`, men denna
+processor ger resultatet som `$84`. Vad pågår här?
 
-The problem is, `$184` is too big to fit in a single byte (the max is `$FF`),
-and the registers can only hold a single byte.  It's OK though; the processor
-isn't actually dumb. If you were looking carefully enough, you'll have noticed
-that the carry flag was set to `1` after this operation. So that's how you
-know.
+Problemet är, `$184` är för stort för att passa i en enda byte (max är `$FF`),
+och registren kan endast lagra en enda byte. Det är dock OK; processorn
+är faktiskt inte dum. Om du tittade tillräckligt noga, märkte du
+att carry-flaggan (d.v.s. minnessiffran) sattes till `1` efter denna operation. Så det är så du
+vet.
 
-In the simulator below **type** (don't paste) the following code:
+I simulatorn nedan **skriv in** (inte klistra in) följande kod:
 
-    LDA #$80
-    STA $01
-    ADC $01
+    LDA #$80
+    STA $01
+    ADC $01
 
 {% include widget.html %}
 
-An important thing to notice here is the distinction between `ADC #$01` and
-`ADC $01`. The first one adds the value `$01` to the `A` register, but the
-second adds the value stored at memory location `$01` to the `A` register.
+En viktig sak att notera här är skillnaden mellan `ADC #$01` och
+`ADC $01`. Den första adderar värdet `$01` till `A`-registret, men den
+andra adderar värdet lagrat på minnesplats `$01` till `A`-registret.
 
 Assemble, check the **Monitor** checkbox, then step through these three
 instructions. The monitor shows a section of memory, and can be helpful to
@@ -148,6 +148,30 @@ set. They are your bible.
 3. The opposite of `ADC` is `SBC` (subtract with carry). Write a program that
    uses this instruction.
 
+Assemblera, kryssa i **Monitor**-kryssrutan, stega sedan igenom dessa tre
+instruktioner. Monitorn visar en del av minnet, och kan vara till hjälp för att
+visualisera exekveringen av programmen. `STA $01` lagrar värdet på `A`-registret
+på minnesplats `$01` och `ADC $01` adderar värdet lagrat i
+minnesplats `$01` till `A`-registret. `$80 + $80` skall motsvara `$100`, men
+eftersom det är större än en byte, sätts `A`-registret till `$00` och
+carry-flaggan sätts. Förutom detta sätts dock zero-flaggan (d.v.s. nollflaggan). Zero-flaggan
+sätts av alla instruktioner där resultatet är noll.
+
+En fullständig lista över 6502 instruktionsuppsättning är [tillgängliga
+här](http://www.6502.org/tutorials/6502opcodes.html) och
+[här](http://www.obelisk.demon.co.uk/6502/reference.html) (jag brukar hänvisa till
+bägge sidorna enär de har sina styrkor och svagheter). Dessa sidor anger
+argument till varje instruktion, vilka register de använder, och vilka flaggor som de
+sätter. De är din bibel.
+
+###Övningar###
+
+1. Du har sett `TAX`  Du kan nog gissa vad `TAY`, `TXA` och `TYA` gör,
+   men skriv lite kod för att testa dina antaganden.
+2. Skriv om det första exemplet i detta avsnitt för att använda `Y`-registret i stället för
+   `X`-registeret.
+3. Motsatsen till `ADC` är `SBC` (subtrahera med carry). Skriv ett program som
+   använder denna instruktion .
 
 <h2 id='branching'>Branching</h2>
 
