@@ -1,4 +1,4 @@
----
+[/color]---
 layout: default
 ---
 
@@ -148,7 +148,7 @@ sätter. De är din bibel.
 3. Motsatsen till `ADC` är `SBC` (subtrahera med carry). Skriv ett program som
    använder denna instruktion .
 
-<h2 id='branching'>Branching</h2>
+<h2 id='branching'>Villkorliga hopp</h2>
 
 So far we're only able to write basic programs without any branching logic.
 Let's change that.
@@ -187,6 +187,44 @@ number of bytes to go backwards or forwards from the next instruction) so
 branch instructions can only go forward and back around 256 bytes. This means
 they can only be used to move around local code. For moving further you'll need
 to use the jumping instructions.
+
+Hittills har vi bara kunnat skriva grundläggande program utan villkorliga hopp.
+Låt oss ändra på det.
+
+6502 assembler har en massa hoppinstruktioner, som alla
+hoppar baserat på om vissa flaggor är satta eller inte. I det här exemplet kommer vi att
+titta på `BNE`: "Hoppa om inte lika" (en. "Branch on Not Equal").
+
+{% include start.html %}
+  LDX #$08
+decrement:
+  DEX
+  STX $0200
+  CPX #$03
+  BNE decrement
+  STX $0201
+  BRK
+{% include end.html %}
+
+Först laddar vi värdet `$08` i `X`-registret. Nästa rad är en etikett.
+Etiketter markerar bara vissa punkter i ett program så att vi kan gå tillbaka till dem senare.
+Efter etiketten minskar (dekrementerar) vi `X` med 1, lagrar det i `$0200` (övre, vänstra pixeln), och
+jämför det sedan med värdet `$03`.
+[`CPX`](http://www.obelisk.demon.co.uk/6502/reference.html#CPX) jämför
+värde i `X`-registret med ett annat värde. Om de två värdena är lika,
+sätts `Z`-flaggan till `1`, annars sätts den till `0`.
+
+Nästa rad, `BNE decrenent`, flyttar exekveringen till decrement-etiketten om
+den så kallade `Z`-flaggan är satt till `0` (vilket betyder att de två värdena i `CPX`-jämförelsen
+inte var lika), annars gör den ingenting och vi lagrar `X` i `$0201`, och sen
+avslutar vi programmet.
+
+I assembler, brukar man använda etiketter med hoppinstruktioner. När
+en sådan assemblerats så omvandlas etiketten till en en-byte relativ förflyttning (ett
+antal byte att hoppa bakåt eller framåt från nästa instruktion) så
+hoppinstruktioner kan bara gå framåt och tillbaka runt 256 byte. Detta betyder att
+de endast kan användas för att förflytta sig omkring i lokal kod. För att förflytta längre måste du
+använda långhoppinstruktionerna.
 
 ###Exercises###
 
