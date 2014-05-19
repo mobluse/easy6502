@@ -1,4 +1,4 @@
-[/color]---
+---
 layout: default
 ---
 
