@@ -176,24 +176,23 @@ jämför det sedan med värdet `$03`.
 värde i `X`-registret med ett annat värde. Om de två värdena är lika,
 sätts `Z`-flaggan till `1`, annars sätts den till `0`.
 
-Nästa rad, `BNE decrenent`, flyttar exekveringen till decrement-etiketten om
+Nästa rad, `BNE decrement`, flyttar exekveringen till decrement-etiketten om
 den så kallade `Z`-flaggan är satt till `0` (vilket betyder att de två värdena i `CPX`-jämförelsen
 inte var lika), annars gör den ingenting och vi lagrar `X` i `$0201`, och sen
 avslutar vi programmet.
 
-I assembler, brukar man använda etiketter med hoppinstruktioner. När
+I assembler brukar man använda etiketter tillsammans med hoppinstruktioner. När
 en sådan assemblerats så omvandlas etiketten till en en-byte relativ förflyttning (ett
 antal byte att hoppa bakåt eller framåt från nästa instruktion) så
 hoppinstruktioner kan bara gå framåt och tillbaka runt 256 byte. Detta betyder att
 de endast kan användas för att förflytta sig omkring i lokal kod. För att förflytta längre måste du
 använda långhoppinstruktionerna.
 
-###Exercises###
+###Övningar###
 
-1. The opposite of `BNE` is `BEQ`. Try writing a program that uses `BEQ`.
-2. `BCC` and `BCS` ("branch on carry clear" and "branch on carry set") are used
-   to branch on the carry flag. Write a program that uses one of these two.
-
+1. Motsatsen till `BNE` är `BEQ`. Försök att skriva ett program som använder `BEQ`. 
+2. `BCC` och `BCS` ("hoppa om minnessiffran är nollställd" (en. "branch on carry clear") och "hoppa om minnessiffran är satt" (en. "branch on carry set")) används 
+   för att hoppa baserat på carry-flaggan. Skriv ett program som använder en av dessa två.
 
 <h2 id='addressing'>Addressing modes</h2>
 
