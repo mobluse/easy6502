@@ -194,18 +194,18 @@ använda långhoppinstruktionerna.
 2. `BCC` och `BCS` ("hoppa om minnessiffran är nollställd" (en. "branch on carry clear") och "hoppa om minnessiffran är satt" (en. "branch on carry set")) används 
    för att hoppa baserat på carry-flaggan. Skriv ett program som använder en av dessa två.
 
-<h2 id='addressing'>Addressing modes</h2>
+<h2 id='addressing'>Adresseringssätt</h2>
 
-The 6502 uses a 16-bit address bus, meaning that there are 65536 bytes of
-memory available to the processor. Remember that a byte is represented by two
-hex characters, so the memory locations are generally represented as `$0000 -
-$ffff`. There are various ways to refer to these memory locations, as detailed below.
+6502 använder en 16-bitars adressbuss, vilket innebär att det finns 65536 bytes 
+minne tillgängligt för processorn. Kom ihåg att en byte representeras av två 
+hex-tecken, så minnesadresserna anges i allmänhet som `$0000 - $ffff`. Det finns 
+olika sätt att hänvisa till dessa minnesadresser, vilket beskrivs i detalj nedan. 
 
-With all these examples you might find it helpful to use the memory monitor to
-watch the memory change. The monitor takes a starting memory location and a
-number of bytes to display from that location. Both of these are hex values.
-For example, to display 16 bytes of memory from `$c000`, enter `c000` and `10`
-into **Start** and **Length**, respectively.
+Tillsammans med alla dessa exempel kan du tycka att det underlättar att använda minnesmonitorn för
+att se när minnet ändras. Monitorn tar en utgångsadress och antalet byte som 
+visas från den adressen. Båda dessa är hex-värden. 
+Till exempel, för att visa 16 byte minne från `$c000`, ange `c000` och `10` 
+i **Start** respektive **Length**.
 
 ###Absolute: `$c000`###
 
