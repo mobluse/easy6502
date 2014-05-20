@@ -8,7 +8,7 @@ I denna lilla bok jag ska visa dig hur du kommer igång att skriva 6502-assemble
 
 Så, varför skulle du vilja lära dig 6502? Det är ett dött språk, eller hur? Tja, det är latin också. Och de lär fortfarande ut det. [Q.E.D.](http://en.wikipedia.org/wiki/Q.E.D.)
 
-(Faktiskt, jag har fått tillförlitlig information om att 6502-processorer fortfarande produceras av [Western Design Center (WDC)](http://www.65xx.com/wdc/), så uppenbarligen är 6502 *inte* ett dött språk! Vem kunde tro det?)
+(Faktiskt, jag har fått tillförlitlig information om att 6502-processorer fortfarande produceras av [Western Design Center (WDC)](http://65xx.com/Developer_Products/65xx-chips/), så uppenbarligen är 6502 *inte* ett dött språk! Vem kunde tro det?)
 
 Allvarligt talat, jag tycker det är värdefullt att ha en förståelse för assembler. Assembler är den lägsta nivån av abstraktion i datorer - den punkt där koden är fortfarande läsbar. Assembler översätter direkt till byte som sedan utförs av datorns processor. Om du förstår hur det fungerar, har du i princip blivit en [datortrollkarl](http://skilldrick.co.uk/2011/04/magic-in-software-development/).
 
