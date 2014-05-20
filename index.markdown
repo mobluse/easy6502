@@ -207,42 +207,42 @@ visas från den adressen. Båda dessa är hex-värden.
 Till exempel, för att visa 16 byte minne från `$c000`, ange `c000` och `10` 
 i **Start** respektive **Length**.
 
-###Absolute: `$c000`###
+###Absolut: `$c000`###
 
-With absolute addressing, the full memory location is used as the argument to the instruction. For example:
+Med absolut adressering, används den fullständiga minnesadressen som argument till instruktionen. Till exempel:
 
-    STA $c000 ;Store the value in the accumulator at memory location $c000
+    STA $c000 ;Lagra värdet i ackumulatorn på minnesadress $c000
 
-###Zero page: `$c0`###
+###Noll-sida: `$c0`###
 
-All instructions that support absolute addressing (with the exception of the jump
-instructions) also have the option to take a single-byte address. This type of
-addressing is called "zero page" - only the first page (the first 256 bytes) of
-memory is accessible. This is faster, as only one byte needs to be looked up,
-and takes up less space in the assembled code as well.
+Alla instruktioner som stödjer absolut adressering (med undantag för långhoppinstruktionerna) 
+har också möjlighet att ta en en-byte adress. Denna typ av
+adressering kallas "noll-sida" - bara den första sidan (de första 256 byte) av
+minnet är tillgängligt. Detta är snabbare, eftersom endast en byte behöver slås upp,
+och tar även upp mindre plats i den assemblerade koden (d.v.s. maskinkoden).
 
-###Zero page,X: `$c0,X`###
+###Noll-sida,X: `$c0,X`###
 
-This is where addressing gets interesting. In this mode, a zero page address is given, and then the value of the `X` register is added. Here is an example:
+Det är här som adressering blir intressant. I detta läge är en nollsidesadress given, och sedan läggs värdet för `X`-registret till. Här är ett exempel:  
 
-    LDX #$01   ;X is $01
-    LDA #$aa   ;A is $aa
-    STA $a0,X ;Store the value of A at memory location $a1
-    INX        ;Increment X
-    STA $a0,X ;Store the value of A at memory location $a2
+    LDX #$01   ;X är $01
+    LDA #$aa   ;A är $aa
+    STA $a0,X  ;Lagra värdet av A i minnesadress $a1
+    INX        ;Öka X med 1
+    STA $a0,X  ;Lagra värdet av A i minnesadress $a2
 
-If the result of the addition is larger than a single byte, the address wraps around. For example:
+Om resultatet av additionen är större än en enda byte, så går adressen runt. Till exempel:  
 
     LDX #$05
-    STA $ff,X ;Store the value of A at memory location $04
+    STA $ff,X  ;Lagra värdet av A i minnesadress $04
 
-###Zero page,Y: `$c0,Y`###
+###Noll-sida,Y: `$c0,Y`###
 
-This is the equivalent of zero page,X, but can only be used with `LDX` and `STX`.
+Detta motsvarar noll-sida,X, men kan bara användas med `LDX` och `STX`.
 
 ###Absolute,X and absolute,Y: `$c000,X` and `$c000,Y`###
 
-These are the absolute addressing versions of zero page,X and zero page,Y. For example:
+These are the absolute addressing versions of zero page,X and zero page,Y. For example:  
 
     LDX #$01
     STA $0200,X ;Store the value of A at memory location $0201
