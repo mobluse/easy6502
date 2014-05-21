@@ -145,8 +145,8 @@ sätter. De är din bibel.
    men skriv lite kod för att testa dina antaganden.
 2. Skriv om det första exemplet i detta avsnitt för att använda `Y`-registret i stället för
    `X`-registeret.
-3. Motsatsen till `ADC` är `SBC` (subtrahera med carry). Skriv ett program som
-   använder denna instruktion .
+3. Motsatsen till `ADC` är `SBC` (subtrahera med carry (d.v.s. lån)). Skriv ett program som
+   använder denna instruktion.
 
 <h2 id='branching'>Villkorliga hopp</h2>
 
