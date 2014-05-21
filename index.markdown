@@ -4,15 +4,15 @@ layout: default
 
 <h2 id="intro">Introduktion</h2>
 
-I denna lilla bok jag ska visa dig hur du kommer igång att skriva 6502-assembler. 6502-processorn var massivt populär på sjuttio- och åttiotalet, och drev kända datorer som [BBC Micro](http://en.wikipedia.org/wiki/BBC_Micro), [Atari 2600](http://en.wikipedia.org/wiki/Atari_2600), [Commodore 64](http://en.wikipedia.org/wiki/Commodore_64), [Apple II](http://en.wikipedia.org/wiki/Apple_II), och [Nintendo Entertainment System (NES)](http://en.wikipedia.org/wiki/Nintendo_Entertainment_System). Bender i Futurama [har en 6502-processor som hjärna](http://www.transbyte.org/SID/SID-files/Bender_6502.jpg). [Även Terminator programmerades i 6502](http://www.pagetable.com/docs/terminator/00-37-23.jpg).
+I denna lilla bok jag ska visa dig hur du kommer igång att skriva 6502-assembler. 6502-processorn var massivt populär på sjuttio- och åttiotalet, och drev kända datorer som [BBC Micro](http://sv.wikipedia.org/wiki/BBC_Micro), [Atari 2600](http://sv.wikipedia.org/wiki/Atari_2600), [Commodore 64](http://sv.wikipedia.org/wiki/Commodore_64), [Apple II](http://sv.wikipedia.org/wiki/Apple_II), och [Nintendo Entertainment System (NES)](http://sv.wikipedia.org/wiki/Nintendo_Entertainment_System). Bender i Futurama [har en 6502-processor som hjärna](http://www.transbyte.org/SID/SID-files/Bender_6502.jpg). [Även Terminator programmerades i 6502](http://www.pagetable.com/docs/terminator/00-37-23.jpg).
 
-Så, varför skulle du vilja lära dig 6502? Det är ett dött språk, eller hur? Tja, det är latin också. Och de lär fortfarande ut det. [Q.E.D.](http://en.wikipedia.org/wiki/Q.E.D.)
+Så, varför skulle du vilja lära dig 6502? Det är ett dött språk, eller hur? Tja, det är latin också. Och de lär fortfarande ut det. [Q.E.D.](http://sv.wikipedia.org/wiki/Quod_erat_demonstrandum)
 
 (Faktiskt, jag har fått tillförlitlig information om att 6502-processorer fortfarande produceras av [Western Design Center (WDC)](http://65xx.com/Developer_Products/65xx-chips/), så uppenbarligen är 6502 *inte* ett dött språk! Vem kunde tro det?)
 
 Allvarligt talat, jag tycker det är värdefullt att ha en förståelse för assembler. Assembler är den lägsta nivån av abstraktion i datorer - den punkt där koden är fortfarande läsbar. Assembler översätter direkt till byte som sedan utförs av datorns processor. Om du förstår hur det fungerar, har du i princip blivit en [datortrollkarl](http://skilldrick.co.uk/2011/04/magic-in-software-development/).
 
-Varför 6502? Varför inte ett *användbart* assemblerspråk, som [x86](http://en.wikipedia.org/wiki/X86)? Tja, jag tror inte att lära x86 är användbart. Jag tror inte att du någonsin kommer att behöva skriva assembler i ditt vanliga jobb - det är enbart en akademisk övning, något att utöka ditt sinne och ditt tänkande med. 6502 skrevs ursprungligen i en annan tid, en tid då de flesta av utvecklarna skrev assembler direkt, i stället för i dessa nymodiga högnivåprogrammeringsspråk. Så de var konstruerade för att skrivas av människor. Mer moderna assemblerspråk är tänkta att skrivas av kompilatorer, så låt oss lämna det till dem. Dessutom är 6502 *kul*. Ingen har någonsin kallat x86 *kul*.
+Varför 6502? Varför inte ett *användbart* assemblerspråk, som [x86](http://sv.wikipedia.org/wiki/X86)? Tja, jag tror inte att lära x86 är användbart. Jag tror inte att du någonsin kommer att behöva skriva assembler i ditt vanliga jobb - det är enbart en akademisk övning, något att utöka ditt sinne och ditt tänkande med. 6502 skrevs ursprungligen i en annan tid, en tid då de flesta av utvecklarna skrev assembler direkt, i stället för i dessa nymodiga högnivåprogrammeringsspråk. Så de var konstruerade för att skrivas av människor. Mer moderna assemblerspråk är tänkta att skrivas av kompilatorer, så låt oss lämna det till dem. Dessutom är 6502 *kul*. Ingen har någonsin kallat x86 *kul*.
 
 
 <h2 id="first-program">Vårt första program</h2>
@@ -42,8 +42,8 @@ märkt att `A=` ändras från `$00` till `$01` och `PC=` ändras från `$0600` t
 
 Alla tal med prefixet `$` i 6502-assembler (och, i förlängningen, i
 denna bok) är i hexadecimalt (hex) format. Om du inte är bekant med hex-tal, rekommenderar jag att du läser [Wikipedia
-artikeln](http://en.wikipedia.org/wiki/Hexadecimal). Allt som har `#` som prefix
-är verkliga, konkreta tal (`#` är i detta sammanhang den amerikanska mostvarigheten till förkortningen *no*, d.v.s. numero). Alla andra tal (d.v.s. utan `#`) hänvisar till en minnesplats (d.v.s. en adress).
+artikeln](http://sv.wikipedia.org/wiki/Hexadecimala_talsystemet). Allt som har `#` som prefix
+är verkliga, konkreta tal (`#` är i detta sammanhang den amerikanska mostvarigheten till förkortningen, *no*, d.v.s. numero). Alla andra tal (d.v.s. utan `#`) hänvisar till en minnesplats (d.v.s. en adress).
 
 Utrustad med den kunskapen, bör du kunna inse att instruktionen
 `LDA #$01` laddar hextalet `$01` i register `A` (LoaD A med talet `$01`). Jag ska gå in mer
