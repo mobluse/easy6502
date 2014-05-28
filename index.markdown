@@ -240,49 +240,48 @@ Om resultatet av additionen är större än en enda byte, så går adressen runt
 
 Detta motsvarar noll-sida,X, men kan bara användas med `LDX` och `STX`.
 
-###Absolute,X and absolute,Y: `$c000,X` and `$c000,Y`###
+###Absolut,X och absolut,Y: `$c000,X` och `$c000,Y`###
 
-These are the absolute addressing versions of zero page,X and zero page,Y. For example:  
+Dessa är absolutadresseringsversionerna av noll-sida,X och noll-sida,Y. Till exempel: 
 
-    LDX #$01
-    STA $0200,X ;Store the value of A at memory location $0201
+    LDX #$01 
+    STA $0200,X ;Lagra värdet av A på minnesadress $0201
 
-###Immediate: `#$c0`###
+###Omedelbar: `#$c0`###
 
-Immediate addressing doesn't strictly deal with memory addresses - this is the
-mode where actual values are used. For example, `LDX #$01` loads the value
-`$01` into the `X` register. This is very different to the zero page
-instruction `LDX $01` which loads the value at memory location `$01` into the
-`X` register.
+Omedelbar adressering handlar inte direkt om minnesadresser - detta är det 
+adresseringssätt där faktiska värden används. Till exempel, `LDX #$01` laddar värdet 
+`$01` i `X` registret. Det är väldigt annorlunda jämfört med noll-sideinstruktionen 
+`LDX $01` som läser in värdet från minnesadress `$01` i `X` registret.
 
-###Relative: `$c0` (or label)###
+###Relativ: `$c0` (eller etikett)###
 
-Relative addressing is used for branching instructions. These instructions take
-a single byte, which is used as an offset from the following instruction.
+Relativ adressering används för hoppinstruktioner. Dessa instruktioner tar
+en enda byte, som används som en förskjutning från den följande instruktionen.
 
-Assemble the following code, then click the **Hexdump** button to see the assembled code.
+Assemblera följande kod, klicka sedan på **Hexdump**-knappen för att se den assemblerade koden.
 
 {% include start.html %}
   LDA #$01
   CMP #$02
-  BNE notequal
+  BNE ejlika
   STA $22
-notequal:
+ejlika:
   BRK
 {% include end.html %}
 
-The hex should look something like this:
+Hexkoden bör se ut ungefär så här:  
 
-    a9 01 c9 02 d0 02 85 22 00
+    a9 01 c9 02 d0 02 85 22 00  
 
-`a9` and `c9` are the processor opcodes for immediate-addressed `LDA` and `CMP`
-respectively. `01` and `02` are the arguments to these instructions. `d0` is
-the opcode for `BNE`, and its argument is `02`. This means "skip over the next
-two bytes" (`85 22`, the assembled version of `STA $22`). Try editing the code
-so `STA` takes a two-byte absolute address rather than a single-byte zero page
-address (e.g. change `STA $22` to `STA $2222`). Reassemble the code and look at
-the hexdump again - the argument to `BNE` should now be `03`, because the
-instruction the processor is skipping past is now three bytes long.
+`a9` och `c9` är processor-opkoder för omedelbart adresserade `LDA` respektive `CMP`. 
+`01` och `02` är argumenten till dessa instruktioner. `d0` är
+opkoden för `BNE`, och dess argument är `02`. Det innebär att "hoppa över nästa
+två byte" (`85 22`, den assemblerade versionen av `STA $22`). Försök att redigera koden
+så att `STA` tar en två-byte absolut adress i stället för en enda byte noll-sideadress 
+(t.ex. ändra `STA $22` till `STA $2222`). Assemblera om koden och titta på
+hexdumpen igen - argumentet till `BNE` ska nu vara `03`, eftersom
+instruktionen som processorn skall hoppa över nu är tre byte lång.
 
 ###Implicit###
 
