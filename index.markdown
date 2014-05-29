@@ -251,8 +251,8 @@ Dessa är absolutadresseringsversionerna av noll-sida,X och noll-sida,Y. Till ex
 
 Omedelbar adressering handlar inte direkt om minnesadresser - detta är det 
 adresseringssätt där faktiska värden används. Till exempel, `LDX #$01` laddar värdet 
-`$01` i `X` registret. Det är väldigt annorlunda jämfört med noll-sideinstruktionen 
-`LDX $01` som läser in värdet från minnesadress `$01` i `X` registret.
+`$01` i `X`-registret. Det är väldigt annorlunda jämfört med noll-sideinstruktionen 
+`LDX $01` som läser in värdet från minnesadress `$01` i `X`-registret.
 
 ###Relativ: `$c0` (eller etikett)###
 
@@ -280,36 +280,36 @@ opkoden för `BNE`, och dess argument är `02`. Det innebär att "hoppa över n�
 två byte" (`85 22`, den assemblerade versionen av `STA $22`). Försök att redigera koden
 så att `STA` tar en två-byte absolut adress i stället för en enda byte noll-sideadress 
 (t.ex. ändra `STA $22` till `STA $2222`). Assemblera om koden och titta på
-hexdumpen igen - argumentet till `BNE` ska nu vara `03`, eftersom
+hexdumpen igen (klicka på **Hexdump**) - argumentet till `BNE` ska nu vara `03`, eftersom
 instruktionen som processorn skall hoppa över nu är tre byte lång.
 
 ###Implicit###
 
-Some instructions don't deal with memory locations (e.g. `INX` - increment the
-`X` register). These are said to have implicit addressing - the argument is
-implied by the instruction.
+Vissa instruktioner hanterar inte minnesadresser (t.ex. `INX` - öka (d.v.s. inkrementera)
+`X`-registret). Dessa sägs ha implicit (eller underförstådd) adressering - argumentet 
+är inbyggt i instruktionen.
 
-###Indirect: `($c000)`###
+###Indirekt: `($c000)`###
 
-Indirect addressing uses an absolute address to look up another address. The
-first address gives the least significant byte of the address, and the
-following byte gives the most significant byte. That can be hard to wrap your
-head around, so here's an example:
+Indirekt adressering använder en absolut adress för att slå upp en annan adress. Den 
+första adressen ger den minst signifikanta byten i adressen, och 
+den följande byten ger den mest signifikanta byten. Detta kan vara svårt att förstå, 
+så här är ett exempel: 
 
 {% include start.html %}
 LDA #$01
 STA $f0
 LDA #$cc
 STA $f1
-JMP ($00f0) ;dereferences to $cc01
+JMP ($00f0) ;avrefereras till $cc01
 {% include end.html %}
 
-In this example, `$f0` contains the value `$01` and `$f1` contains the value
-`$cc`. The instruction `JMP ($f0)` causes the processor to look up the two
-bytes at `$f0` and `$f1` (`$01` and `$cc`) and put them together to form the
-address `$cc01`, which becomes the new program counter. Assemble and step
-through the program above to see what happens. I'll talk more about `JMP` in
-the section on [Jumping](#jumping).
+I detta exempel innehåller `$f0` värdet `$01` och `$f1` innehåller värdet
+`$cc`. Instruktionen `JMP ($00f0)` får processorn att slå upp de två
+byten på `$f0` och `$f1` (`$01` och `$cc`) och sätta ihop dem för att bilda
+adressen `$cc01`, som blir den nya programräknaren. Assemblera och stega
+igenom programmet ovan för att se vad som händer. Jag ska prata mer om `JMP` i
+avsnittet om [Långa hopp](#jumping).
 
 ###Indexed indirect: `($c0,X)`###
 
