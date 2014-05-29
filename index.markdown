@@ -337,32 +337,31 @@ i i den tidigare instruktionen, så `A`-registret får samma
 värde som `Y`, om än genom en omfattande omväg. Du kommer inte att se denna 
 ofta.
 
-###Indirect indexed: `($c0),Y`###
+###Indirekt indexerad: `($c0),Y`###
 
-Indirect indexed is like indexed indirect but less insane. Instead of adding
-the `X` register to the address *before* dereferencing, the zero page address
-is dereferenced, and the `Y` register is added to the resulting address.
+Indirekt indexerad är som indexerad indirekt men mindre galen. I stället för att addera
+`X`-registret till adressen *innan* avreferering, så avrefereras noll-sidans adress, 
+och `Y`-registret adderas till den resulterande adressen.
 
 {% include start.html %}
 LDY #$01
 LDA #$03
 STA $01
-LDA #$07
+LDA #$07 
 STA $02
-LDX #$0a
+LDX #$0a 
 STX $0704
 LDA ($01),Y
 {% include end.html %}
 
-In this case, `($01)` looks up the two bytes at `$01` and `$02`: `$03` and
-`$07`. These form the address `$0703`. The value of the `Y` register is added
-to this address to give the final address `$0704`.
+I detta fall, `($01)` slår upp de två byten i `$01` och `$02`: `$03` och 
+`$07`. Dessa utgör adressen `$0703`. Värdet på `Y`-registret läggs 
+till den här adressen för att ge den slutliga adressen `$0704`.
 
-###Exercise###
+###Övning###
 
-1. Try to write code snippets that use each of the 6502 addressing modes.
-   Remember, you can use the monitor to watch a section of memory.
-
+1. Försök att skriva kodsnuttar som använder sig av var och en av 6502-adresseringssätt. 
+   Kom ihåg att du kan använda monitorn för att titta på en del av minnet.
 
 <h2 id='stack'>The stack</h2>
 
