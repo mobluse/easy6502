@@ -311,11 +311,11 @@ adressen `$cc01`, som blir den nya programräknaren. Assemblera och stega
 igenom programmet ovan för att se vad som händer. Jag ska prata mer om `JMP` i
 avsnittet om [Långa hopp](#jumping).
 
-###Indexed indirect: `($c0,X)`###
+###Indexerad indirekt: `($c0,X)`###
 
-This one's kinda weird. It's like a cross between zero page,X and indirect.
-Basically, you take the zero page address, add the value of the `X` register to
-it, then use that to look up a two-byte address. For example:
+Den här är ganska konstig. Det är som en korsning mellan noll-sida,X och indirekt. 
+I grund och botten tar du noll-sidans adress, lägger till värdet av `X`-registret, 
+använder sedan summan för att slå upp en två-byte adress. Till exempel:
 
 {% include start.html %}
 LDX #$01
@@ -326,17 +326,16 @@ STA $02
 LDY #$0a
 STY $0605
 LDA ($00,X)
-{% include end.html %}
+{% include end.html %} 
 
-Memory locations `$01` and `$02` contain the values `$05` and `$06`
-respectively. Think of `($00,X)` as `($00 + X)`. In this case `X` is `$01`, so
-this simplifies to `($01)`. From here things proceed like standard indirect
-addressing - the two bytes at `$01` and `$02` (`$05` and `$06`) are looked up
-to form the address `$0605`.  This is the address that the `Y` register was
-stored into in the previous instruction, so the `A` register gets the same
-value as `Y`, albeit through a much more circuitous route. You won't see this
-much.
-
+Minnesadresserna `$01` och `$02` innehåller värdena `$05` respektive `$06`. 
+Tänk på `($00,X)` som `($00+X)`. I detta fall är `X` lika med `$01`, så 
+detta förenklas till `($01)`. Härifrån fortgår det som vid normal indirekt 
+adressering - de två byten vid `$01` och `$02` (`$05` och `$06`) slås upp 
+för att bilda adressen `$0605`. Detta är den adress som `Y`-registret lagrades
+i i den tidigare instruktionen, så `A`-registret får samma 
+värde som `Y`, om än genom en omfattande omväg. Du kommer inte att se denna 
+ofta.
 
 ###Indirect indexed: `($c0),Y`###
 
