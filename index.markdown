@@ -365,44 +365,9 @@ till den här adressen för att ge den slutliga adressen `$0704`.
 
 <h2 id='stack'>Stacken</h2>
 
-The stack in a 6502 processor is just like any other stack - values are pushed
-onto it and popped ("pulled" in 6502 parlance) off it. The current depth of the
-stack is measured by the stack pointer, a special register. The stack lives in
-memory between `$0100` and `$01ff`. The stack pointer is initially `$ff`, which
-points to memory location `$01ff`. When a byte is pushed onto the stack, the
-stack pointer becomes `$fe`, or memory location `$01fe`, and so on.
-
-Two of the stack instructions are `PHA` and `PLA`, "push accumulator" and "pull
-accumulator". Below is an example of these two in action.
-
-{% include start.html %}
-  LDX #$00
-  LDY #$00
-firstloop:
-  TXA
-  STA $0200,Y
-  PHA
-  INX
-  INY
-  CPY #$10
-  BNE firstloop ;loop until Y is $10
-secondloop:
-  PLA
-  STA $0200,Y
-  INY
-  CPY #$20      ;loop until Y is $20
-  BNE secondloop
-{% include end.html %}
-
-`X` holds the pixel colour, and `Y` holds the position of the current pixel.
-The first loop draws the current colour as a pixel (via the `A` register),
-pushes the colour to the stack, then increments the colour and position.  The
-second loop pops the stack, draws the popped colour as a pixel, then increments
-the position. As should be expected, this creates a mirrored pattern.
-
 Stacken i en 6502-processor är precis som alla andra stackar (d.v.s. travar/högar) - värden läggs
 ("pushas") på den och lyfts ("poppas", eller "pullas" i 6502-språkbruk) av den. Det aktuella djupet för
-stacken mäts genom stackpekaren, ett särskilt register. Stacken bor i
+stacken mäts av stackpekaren, ett särskilt register. Stacken bor i
 minnet mellan `$0100` och `$01ff`. Stackpekaren är initialt `$ff`, vilket
 pekar på minnesadress `$01ff`. När en byte skjuts på stacken, så blir
 stackpekaren `$fe`, eller minnesadress `$01fe`, och så vidare.
