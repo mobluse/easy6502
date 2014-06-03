@@ -363,7 +363,7 @@ till den här adressen för att ge den slutliga adressen `$0704`.
 1. Försök att skriva kodsnuttar som använder sig av var och en av 6502-adresseringssätt. 
    Kom ihåg att du kan använda monitorn för att titta på en del av minnet.
 
-<h2 id='stack'>The stack</h2>
+<h2 id='stack'>Stacken</h2>
 
 The stack in a 6502 processor is just like any other stack - values are pushed
 onto it and popped ("pulled" in 6502 parlance) off it. The current depth of the
@@ -400,6 +400,40 @@ pushes the colour to the stack, then increments the colour and position.  The
 second loop pops the stack, draws the popped colour as a pixel, then increments
 the position. As should be expected, this creates a mirrored pattern.
 
+Stacken i en 6502-processor är precis som alla andra stackar (d.v.s. travar/högar) - värden läggs
+("pushas") på den och lyfts ("poppas", eller "pullas" i 6502-språkbruk) av den. Det aktuella djupet för
+stacken mäts genom stackpekaren, ett särskilt register. Stacken bor i
+minnet mellan `$0100` och `$01ff`. Stackpekaren är initialt `$ff`, vilket
+pekar på minnesadress `$01ff`. När en byte skjuts på stacken, så blir
+stackpekaren `$fe`, eller minnesadress `$01fe`, och så vidare.
+
+Två av stackinstruktionerna är `PHA` och `PLA`, "push ackumulator" och "pull
+ackumulator". Nedan är ett exempel på dessa två i aktion.
+
+{% include start.html %}
+  LDX #$00
+  LDY #$00
+förstaloopen:
+  TXA
+  STA $0200,Y
+  PHA
+  INX
+  INY
+  CPY #$10
+  BNE förstaloopen ;loopa tills Y är $10
+andraloopen:
+  PLA
+  STA $0200,Y
+  INY
+  CPY #$20 ;loopa tills Y är $20
+  BNE andraloopen
+{% include end.html %}
+
+`X` lagrar pixelfärgen, och `Y` lagrar positionen för den aktuella pixeln.
+Den första loopen ritar den aktuella färgen som en pixel (via `A`-registret),
+pushar färgen till stacken, ökar sedan färgen och positionen med ett. Den
+andra loopen poppar stacken, ritar den poppade färgen som en bildpunkt, och ökar
+sedan positionen. Som man kan förvänta skapar detta ett speglat mönster.
 
 <h2 id='jumping'>Jumping</h2>
 
