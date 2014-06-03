@@ -413,14 +413,14 @@ ackumulator". Nedan är ett exempel på dessa två i aktion.
 {% include start.html %}
   LDX #$00
   LDY #$00
-förstaloopen:
+foerstaloopen:
   TXA
   STA $0200,Y
   PHA
   INX
   INY
   CPY #$10
-  BNE förstaloopen ;loopa tills Y är $10
+  BNE foerstaloopen ;loopa tills Y är $10
 andraloopen:
   PLA
   STA $0200,Y
