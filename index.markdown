@@ -466,7 +466,7 @@ illustrerar hur `JSR` och `RTS` kan användas tillsammans för att skapa modulä
 Låt oss nu se till att all denna kunskap kommer till nytta, och göra ett spel! Vi ska 
 göra en riktigt enkel version av det klassiska spelet "Masken" (en. "Snake").
 
-Simulatorn-lådan nedan innehåller hela källkoden till spelet. Jag ska 
+Simulator-fönstret nedan innehåller hela källkoden till spelet. Jag ska 
 förklara hur det fungerar i de följande avsnitten. 
 
 [Willem van der Jagt](https://twitter.com/wkjagt) har gjort en [fullständigt kommenterad gist
@@ -475,19 +475,19 @@ i den för fler detaljförklaringar.
 
 {% include snake.html %}
 
-###Overall structure###
+###Övergripande struktur###
 
-After the initial block of comments (lines starting with semicolons), the first
-two lines are:
+Efter det första blocket med kommentarer (rader som börjar med semikolon), så är de första
+två raderna:
 
     jsr init
     jsr loop
 
-`init` and `loop` are both subroutines. `init` initializes the game state, and
-`loop` is the main game loop.
+`init` och `loop` är bägge subrutiner. `init` initierar speltillståndet, och
+`loop` är den viktigaste spelslingan.
 
-The `loop` subroutine itself just calls a number of subroutines sequentially,
-before looping back on itself:
+Själva `loop`-subrutinen anropar bara ett antal subrutiner sekventiellt,
+innan den loopar tillbaka till sig själv:
 
     loop:
       jsr readkeys
@@ -498,15 +498,14 @@ before looping back on itself:
       jsr spinwheels
       jmp loop
 
-First, `readkeys` checks to see if one of the direction keys (W, A, S, D) was
-pressed, and if so, sets the direction of the snake accordingly. Then,
-`checkCollision` checks to see if the snake collided with itself or the apple.
-`updateSnake` updates the internal representation of the snake, based on its
-direction. Next, the apple and snake are drawn. Finally, `spinWheels` makes the
-processor do some busy work, to stop the game from running too quickly. Think
-of it like a sleep command. The game keeps running until the snake collides
-with the wall or itself.
-
+Först kontrollerar `readkeys` om en av riktningsknapparna (W, A, S, D)
+har tryckts ner, och om så är fallet, så ställs riktningen på masken/ormen in i enlighet därmed. Sedan
+kontrollerar `checkCollision` om ormen kolliderade med sig själv eller med äpplet.
+`updateSnake` uppdaterar den interna representationen av ormen, baserat på dess
+riktning. Därefter ritas äpple och orm. Slutligen får `spinWheels`
+processorn att göra en del fördröjningsarbete, för att hindra spelet från att köra för fort. Tänk
+på det som ett sov-kommando. Spelet fortsätter att köra tills ormen kolliderar
+med väggen eller med sig själv.
 
 ###Zero page usage###
 
