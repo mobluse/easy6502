@@ -461,20 +461,19 @@ nästa instruktion, `JSR avsluta`, som hoppar till slutet av filen. Detta
 illustrerar hur `JSR` och `RTS` kan användas tillsammans för att skapa modulär kod.
 
 
-<h2 id='snake'>Creating a game</h2>
+<h2 id='snake'>Att skapa ett spel</h2>
 
-Now, let's put all this knowledge to good use, and make a game! We're going to
-be making a really simple version of the classic game 'Snake'.
+Låt oss nu se till att all denna kunskap kommer till nytta, och göra ett spel! Vi ska 
+göra en riktigt enkel version av det klassiska spelet "Masken" (en. "Snake").
 
-The simulator widget below contains the entire source code of the game. I'll
-explain how it works in the following sections.
+Simulatorn-lådan nedan innehåller hela källkoden till spelet. Jag ska 
+förklara hur det fungerar i de följande avsnitten. 
 
-[Willem van der Jagt](https://twitter.com/wkjagt) made a [fully annotated gist
-of this source code](https://gist.github.com/wkjagt/9043907), so follow along
-with that for more details.
+[Willem van der Jagt](https://twitter.com/wkjagt) har gjort en [fullständigt kommenterad gist
+av denna källkod](https://gist.github.com/wkjagt/9043907), så följ med 
+i den för fler detaljförklaringar.
 
 {% include snake.html %}
-
 
 ###Overall structure###
 
