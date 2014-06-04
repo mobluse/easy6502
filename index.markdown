@@ -413,7 +413,7 @@ Långa hopp är som villkorliga hopp med två huvudsakliga skillnader. För det 
 villkorligt, för det andra, de tar en två-byte absolut adress. För 
 små program, är denna andra detalj inte särskilt viktig, eftersom du oftast
 använder etiketter och assembleraren räknar ut rätt minnesadress med hjälp av 
-etiketten. För större program är dock långa hopp det enda sättet att flytta programräknaren från en 
+etiketten. För större program är dock långa hopp det enda sättet att flytta körningen från en 
 del av koden till en annan.
 
 ###JMP###
@@ -478,6 +478,41 @@ The first instruction causes execution to jump to the `init` label. This sets
 label, which increments `X` until it is equal to `$05`. After that we return to
 the next instruction, `JSR end`, which jumps to the end of the file. This
 illustrates how `JSR` and `RTS` can be used together to create modular code.
+
+`JSR` och `RTS` ("hopp (en. jump) till subrutin" och "retur från subrutin/underprogram") är en
+dynamisk duo som man brukar se tillsammans. `JSR` används för att hoppa från
+den aktuella adressen till en annan del av koden. `RTS` återgår till föregående
+position. Detta är i princip som att anropa en funktion och återvända/returnera.
+
+Processorn vet vart den skall återvända eftersom `JSR` lägger/pushar adressen minus
+ett för nästa instruktion på stacken innan den hoppar till den givna
+adressen. `RTS` lyfter/poppar av denna adress, adderar ett till den, och hoppar till den adressen.
+Ett exempel:
+
+{% include start.html %}
+  JSR init
+  JSR loop
+  JSR slut
+
+init:
+  LDX #$00
+  RTS
+
+loop:
+  INX
+  CPX #$05
+  BNE loop
+  RTS
+
+slut:
+  BRK
+{% include end.html %}
+
+Den första instruktionen gör så att körningen hoppar till `init`-etiketten. Detta sätter
+`X`, och återvänder sedan till nästa instruktion, `JSR loop`. Denna hoppar till `loop`-etiketten, 
+som ökar `X` tills det är lika med `$05`. Efter detta återvänder vi till
+nästa instruktion, `JSR end`, som hoppar till slutet av filen. Detta
+illustrerar hur `JSR` och `RTS` kan användas tillsammans för att skapa modulär kod.
 
 
 <h2 id='snake'>Creating a game</h2>
