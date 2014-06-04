@@ -400,7 +400,7 @@ pushar färgen till stacken, ökar sedan färgen och positionen med ett. Den
 andra loopen poppar stacken, ritar den poppade färgen som en bildpunkt, och ökar
 sedan positionen. Som man kan förvänta skapar detta ett speglat mönster.
 
-<h2 id='jumping'>Jumping</h2>
+<h2 id='jumping'>Långa hopp och subrutiner</h2>
 
 Jumping is like branching with two main differences. First, jumps are not
 conditionally executed, and second, they take a two-byte absolute address. For
@@ -408,6 +408,13 @@ small programs, this second detail isn't very important, as you'll mostly be
 using labels, and the assembler works out the correct memory location from the
 label. For larger programs though, jumping is the only way to move from one
 section of the code to another.
+
+Långa hopp är som villkorliga hopp med två huvudsakliga skillnader. För det första, långa hopp utförs inte 
+villkorligt, för det andra, de tar en två-byte absolut adress. För 
+små program, är denna andra detalj inte särskilt viktig, eftersom du oftast
+använder etiketter och assembleraren räknar ut rätt minnesadress med hjälp av 
+etiketten. För större program är dock långa hopp det enda sättet att flytta programräknaren från en 
+del av koden till en annan.
 
 ###JMP###
 
@@ -423,6 +430,17 @@ there:
   STA $0200
 {% include end.html %}
 
+`JMP` är ett ovillkorligt långt hopp. Här är ett mycket enkelt exempel för att visa det i aktion:
+
+{% include start.html %} 
+   LDA #$03 
+   JMP dit
+   BRK 
+   BRK 
+   BRK 
+dit: 
+   STA $0200 
+{% include end.html %}
 
 ###JSR/RTS###
 
