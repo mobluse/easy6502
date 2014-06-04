@@ -95,8 +95,8 @@ källkoder för att introducera några olika instruktioner:
 {% include start.html %}
 LDA #$c0  ;Ladda hex värde c0 in i A-registret
 TAX       ;Transferera (d.v.s. överför) värdet i A till X
-INX       ;Inkrementera (d.v.s. öka) värdet i X-registret
-ADC #$c4  ;Addera hexvärde c4 till A-registret
+INX       ;INkrementera (d.v.s. öka) värdet i X-registret
+ADC #$c4  ;ADdera med Carry hexvärde c4 till A-registret
 BRK       ;Break - vi är klara
 {% include end.html %}
 
@@ -145,7 +145,7 @@ sätter. De är din bibel.
    men skriv lite kod för att testa dina antaganden.
 2. Skriv om det första exemplet i detta avsnitt för att använda `Y`-registret i stället för
    `X`-registeret.
-3. Motsatsen till `ADC` är `SBC` (subtrahera med carry (d.v.s. lån)). Skriv ett program som
+3. Motsatsen till `ADC` är `SBC` (SuBtrahera med Carry (d.v.s. lån)). Skriv ett program som
    använder denna instruktion.
 
 <h2 id='branching'>Villkorliga hopp</h2>
@@ -159,11 +159,11 @@ titta på `BNE`: "Hoppa om inte lika" (en. "Branch on Not Equal").
 
 {% include start.html %}
   LDX #$08
-decrement:
-  DEX
+minska:
+  DEX        ;DEkrementera (d.v.s. minska) värdet i X-registret
   STX $0200
   CPX #$03
-  BNE decrement
+  BNE minska
   STX $0201
   BRK
 {% include end.html %}
@@ -372,8 +372,8 @@ minnet mellan `$0100` och `$01ff`. Stackpekaren är initialt `$ff`, vilket
 pekar på minnesadress `$01ff`. När en byte skjuts på stacken, så blir
 stackpekaren `$fe`, eller minnesadress `$01fe`, och så vidare.
 
-Två av stackinstruktionerna är `PHA` och `PLA`, "push ackumulator" och "pull
-ackumulator". Nedan är ett exempel på dessa två i aktion.
+Två av stackinstruktionerna är `PHA` och `PLA`, "PusH Ackumulator" och "PulL
+Ackumulator". Nedan är ett exempel på dessa två i aktion.
 
 {% include start.html %}
   LDX #$00
@@ -411,7 +411,7 @@ del av koden till en annan.
 
 ###JMP###
 
-`JMP` är ett ovillkorligt långt hopp. Här är ett mycket enkelt exempel för att visa det i aktion:
+`JMP` är ett ovillkorligt långt hopp (en. JuMP). Här är ett mycket enkelt exempel för att visa det i aktion:
 
 {% include start.html %} 
    LDA #$03 
@@ -420,12 +420,12 @@ del av koden till en annan.
    BRK 
    BRK 
 dit: 
-   STA $0200 
+   STA $0200 
 {% include end.html %}
 
 ###JSR/RTS###
 
-`JSR` och `RTS` ("hopp (en. jump) till subrutin" och "retur från subrutin/underprogram") är en
+`JSR` och `RTS` ("hopp (en. Jump) till SubRutin" och "ReTur från Subrutin/underprogram") är en
 dynamisk duo som man brukar se tillsammans. `JSR` används för att hoppa från
 den aktuella adressen till en annan del av koden. `RTS` återgår till föregående
 position. Detta är i princip som att anropa en funktion och återvända/returnera.
