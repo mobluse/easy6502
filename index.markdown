@@ -610,6 +610,29 @@ number between 2 and 5 into `$01`. Because the least significant byte comes
 first with indirect addressing, this translates into a memory address between
 `$0200` and `$05ff`: the exact range used to draw the display.
 
+Nästa subrutin, `generateApplePosition` ställer in äpplets läge till en
+slumpmässig position på skärmen. Först laddar det en slumpmässig byte till
+ackumulatorn (`$fe` är en slumpgenerator i denna simulator). Detta
+lagras i `$00`. Därefter laddas en annan slumpmässig byte in i
+ackumulatorn, som sedan `AND`-as (d.v.s. bitvis och) med värdet `$03`. Detta avsnitt behöver nu en
+liten avstickare.
+
+Hexvärdet `$07` representeras i binär form som `00000111`. `AND` opkoden
+genomför en bitvis *och* (en. *and*) av argumentet med ackumulatorn. Till exempel, om
+ackumulatorn innehåller det binära talet `01010101`, då blir resultatet av `AND`
+med `00000111` blir `00000101`.
+
+Resultatet av detta (`AND #$03`) är att maska de två minst signifikanta bitararna i
+ackumulatorn, och sätta de andra till noll. Detta konverterar ett tal i intervallet
+0&ndash;255 till ett tal i intervallet 0&ndash;3.
+
+Efter detta adderas värdet `2` till ackumulatorn, för att skapa ett slutligt, slumpvist
+tal i området 2&ndash;5.
+
+Resultatet av denna subrutin är att ladda en slumpmässig byte i '$00', och ett slumpmässigt
+tal mellan 2 och 5 i `$01`. Eftersom den minst signifikanta byten kommer
+först med indirekt adressering, leder detta till en minnesadress mellan
+`$0200` och `$05ff`: det exakta intervallet som används för att rita på skärmen.
 
 ###The game loop###
 
