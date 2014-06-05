@@ -668,17 +668,17 @@ byte-par för enkelhets skull.
 
       0    1    2    3    4
     Huvud               Svans
-
+    
     [1,5][1,4][1,3][1,2][2,2]    Utgångsläge
-
+    
     [1,5][1,4][1,3][1,2][1,2]    Värdet av (3) kopieras in i (4)
-
+    
     [1,5][1,4][1,3][1,3][1,2]    Värdet av (2) kopieras in i (3)
-
+    
     [1,5][1,4][1,4][1,3][1,2]    Värdet av (1) kopieras in i (2) 
-
+    
     [1,5][1,5][1,4][1,3][1,2]    Värdet av (0) kopieras in i (1) 
-
+    
     [0,5][1,5][1,4][1,3][1,2]    Värdet av (0) uppdateras utifrån riktning
 
 På en låg nivå, är denna subrutin något mer komplex. Först laddas längden 
@@ -686,7 +686,7 @@ in i `X`-registret, som sedan minskas. Strängen nedan
 visar utgångsminnet för ormen.
 
     Minnesadress: $10 $11 $12 $13 $14 $15
-
+    
     Värde:        $11 $04 $10 $04 $0f $04
 
 The length is initialized to `4`, so `X` starts off as `3`. `LDA $10,x` loads the
@@ -744,23 +744,6 @@ enkla. Till exempel, för att flytta höger, öka bara den minst signifikanta by
 (t.ex. `$0200` blir `$0201`). För att gå ner, lägg till `$20` (t.ex. `$0200` blir
 `$0220`). Vänster och uppåt är det omvända.
 
-Going between sections is more complicated, as we have to take into account the
-most significant byte as well. For example, going down from `$02e1` should lead
-to `$0301`. Luckily, this is fairly easy to accomplish. Adding `$20` to `$e1`
-results in `$01` and sets the carry bit. If the carry bit was set, we know we
-also need to increment the most significant byte.
-
-After a move in each direction, we also need to check to see if the head
-would become out of bounds. This is handled differently for each direction. For
-left and right, we can check to see if the head has effectively "wrapped
-around". Going right from `$021f` by incrementing the least significant byte
-would lead to `$0220`, but this is actually jumping from the last pixel of the
-first row to the first pixel of the second row. So, every time we move right,
-we need to check if the new least significant byte is a multiple of `$20`. This
-is done using a bit check against the mask `$1f`. Hopefully the illustration
-below will show you how masking out the lowest 5 bits reveals whether a number
-is a multiple of `$20` or not.
-
 Att gå mellan remsorna är mer komplicerat, eftersom vi även måste ta hänsyn till den
 mest signifikanta byten. Till exempel, att gå ner från `$02e1` bör leda
 till `$0301`. Lyckligtvis är det ganska lätt att åstadkomma. Att addera `$20` till `$e1`
@@ -781,14 +764,11 @@ nedan visa hur maskering av de lägsta 5 bitarna avslöja om ett tal
     $20: 0010 0000
     $40: 0100 0000
     $60: 0110 0000
-
+    
     $1f: 0001 1111
 
-I won't explain in depth how each of the directions work, but the above
-explanation should give you enough to work it out with a bit of study.
-
-Jag kommer inte att förklara ingående hur var och en av riktningarna fungerar, men
-förklaringen ovan bör ge dig tillräckligt för att reda ut det med lite studier.
+Jag kommer inte att förklara ingående hur varje riktning fungerar, men
+förklaringen ovan bör ge dig tillräckligt för att kunna reda ut det med lite iakttagelser.
 
 ####Rendering the game####
 
