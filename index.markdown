@@ -507,7 +507,7 @@ processorn att göra en del fördröjningsarbete, för att hindra spelet från a
 på det som ett sov-kommando. Spelet fortsätter att köra tills ormen kolliderar
 med väggen eller med sig själv.
 
-###Zero page usage###
+###Nollsideanvändning###
 
 The zero page of memory is used to store a number of game state variables, as
 noted in the comment block at the top of the game. Everything in `$00`, `$01`
@@ -526,6 +526,22 @@ become clear later.
 Finally, byte `$03` contains the current length of the snake, in terms of bytes
 in memory (so a length of 4 means 2 pixels).
 
+Minnets nollsida används för att lagra ett antal speltillståndsvariabler, som
+noteras i kommentarssektionen överst i spelet. Allt i `$00`, `$01`
+och `$10` och uppåt är par av bytes som representerar en två-byte minnesadress
+som kommer att slås upp med hjälp av indirekt adressering. Dessa minnesadresser kommer
+alla att vara mellan `$0200` och `$05ff` - den del av minnet som motsvarar
+simulatorns skärm. Till exempel, om `$00` och `$01` innehöll värdena `$01`
+och `$02`, skulle de hänvisa till den andra bildpunkten på skärmen (`$0201`
+- kom ihåg, den minst signifikanta byten kommer först vid indirekt adressering).
+
+De första två byten lagrar placeringen av äpplet. Denna uppdateras varje gång
+ormen äter äpplet. Byte `$02` innehåller den aktuella riktningen. `1` betyder
+upp, `2` höger, `4` ner, och `8` vänster. Resonemanget bakom dessa siffror kommer
+att framgå senare.
+
+Slutligen, byte `$03` innehåller den aktuella längden på ormen, i form av antal byte
+i minnet (så att en längd av 4 betyder 2 bildpunkter).
 
 ###Initialization###
 
