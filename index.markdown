@@ -528,35 +528,6 @@ i minnet vid adressen `$10` (så att en längd på 4 betyder 2 bildpunkter).
 
 ###Initialisering###
 
-The `init` subroutine defers to two subroutines, `initSnake` and
-`generateApplePosition`. `initSnake` sets the snake direction, length, and then
-loads the initial memory locations of the snake head and body. The byte pair at
-`$10` contains the screen location of the head, the pair at `$12` contains the
-location of the single body segment, and `$14` contains the location of the
-tail (the tail is the last segment of the body and is drawn in black to keep
-the snake moving). This happens in the following code:
-
-    lda #$11
-    sta $10
-    lda #$10
-    sta $12
-    lda #$0f
-    sta $14
-    lda #$04
-    sta $11
-    sta $13
-    sta $15
-
-This loads the value `$11` into the memory location `$10`, the value `$10` into
-`$12`, and `$0f` into `$14`. It then loads the value `$04` into `$11`, `$13`
-and `$15`. This leads to memory like this:
-
-    0010: 11 04 10 04 0f 04
-
-which represents the indirectly-addressed memory locations `$0411`, `$0410` and
-`$04ff` (three pixels in the middle of the display). I'm labouring this point,
-but it's important to fully grok how indirect addressing works.
-
 `init`-subrutinen anropar två subrutiner: `initSnake` och
 `generateApplePosition`. `initSnake` ställer in ormens riktning, längd och
 laddar därefter de ursprungliga minnesadresserna för ormens huvud och kropp. Byte-paret vid
@@ -586,30 +557,6 @@ som representerar de indirekt-adresserade minnesadresserna `$0411`, `$0410` och
 `$040f` (tre pixlar i mitten av displayen). Jag betonar kanske denna sak överdrivet,
 men det är viktigt att till fullo greppa hur indirekt adressering fungerar.
 
-The next subroutine, `generateApplePosition`, sets the apple location to a
-random position on the display. First, it loads a random byte into the
-accumulator (`$fe` is a random number generator in this simulator). This is
-stored into `$00`. Next, a different random byte is loaded into the
-accumulator, which is then `AND`-ed with the value `$03`. This part requires a
-bit of a detour.
-
-The hex value `$03` is represented in binary as `00000111`. The `AND` opcode
-performs a bitwise AND of the argument with the accumulator. For example, if
-the accumulator contains the binary value `01010101`, then the result of `AND`
-with `00000111` will be `00000101`.
-
-The effect of this is to mask out the least significant three bytes of the
-accumulator, setting the others to zero. This converts a number in the range of
-0&ndash;255 to a number in the range of 0&ndash;3.
-
-After this, the value `2` is added to the accumulator, to create a final random
-number in the range 2&ndash;5.
-
-The result of this subroutine is to load a random byte into `$00`, and a random
-number between 2 and 5 into `$01`. Because the least significant byte comes
-first with indirect addressing, this translates into a memory address between
-`$0200` and `$05ff`: the exact range used to draw the display.
-
 Nästa subrutin, `generateApplePosition` ställer in äpplets läge till en
 slumpmässig position på skärmen. Först laddar det en slumpmässig byte till
 ackumulatorn (`$fe` är en slumpgenerator i denna simulator). Detta
@@ -622,7 +569,7 @@ genomför en bitvis *och* (en. *and*) av argumentet med ackumulatorn. Till exemp
 ackumulatorn innehåller det binära talet `01010101`, då blir resultatet av `AND`
 med `00000111` blir `00000101`.
 
-Resultatet av detta (`AND #$03`) är att maska de två minst signifikanta bitararna i
+Resultatet av `AND #$03` är att maska de två minst signifikanta bitararna i
 ackumulatorn, och sätta de andra till noll. Detta konverterar ett tal i intervallet
 0&ndash;255 till ett tal i intervallet 0&ndash;3.
 
@@ -634,14 +581,17 @@ tal mellan 2 och 5 i `$01`. Eftersom den minst signifikanta byten kommer
 först med indirekt adressering, leder detta till en minnesadress mellan
 `$0200` och `$05ff`: det exakta intervallet som används för att rita på skärmen.
 
-###The game loop###
+###Spel-loopen###
 
 Nearly all games have at their heart a game loop. All game loops have the same
 basic form: accept user input, update the game state, and render the game
 state. This loop is no different.
 
+Nästan alla spel har i sitt hjärta en spel-loop. Alla spel-loopar har samma 
+grundläggande form: acceptera användarinmatning, uppdatera speltillståndet, och rita 
+speltillståndet. Denna loop är inte annorlunda.
 
-####Reading the input####
+####Att läsa inmatningen####
 
 The first subroutine, `readKeys`, takes the job of accepting user input. The
 memory location `$ff` holds the ascii code of the most recent key press in this
@@ -671,6 +621,33 @@ be zero. `BNE` means "branch if the zero flag is clear", so in this case we'll
 branch to `illegalMove`, which just returns from the subroutine. Otherwise, the
 new direction (1 in this case) is stored in the appropriate memory location.
 
+Den första subrutinen, `readKeys`, tar på sig jobbet att acceptera användarinmatningen. 
+Minnesadressen `$ff` lagrar ASCII-koden för den senaste knapptryckningen i denna
+simulator. Värdet laddas in i ackumulatorn, jämförs sedan med `$77`
+(hex-koden för W), `$64` (D), `$73` (S) och `$61`. Om någon av dessa
+jämförelser är framgångsrika, hoppar programmet till det lämpliga avsnittet.
+Varje avsnitt (`upKey`, `rightKey` o.s.v.) kontrollerar först för att se om den aktuella
+riktningen är motsatsen till den nya riktningen. Detta kräver en annan liten avstickare.
+
+Som nämnts tidigare, representeras de fyra riktningarna internt av talen
+1, 2, 4 och 8. Vart och ett av dessa tal är en potens av 2, och därmed är de representerade
+av ett binärt tal med en enda `1`:
+
+    1 => 0001 (upp)
+    2 => 0010 (höger)
+    4 => 0100 (ner)
+    8 => 1000 (vänster)
+
+`BIT`-opkoden liknar `AND`, men beräkningen används endast för att sätta
+nollflaggan - det faktiska resultatet kastas. Nollflaggan sätts endast om
+resultatet av att AND-a ackumulatorn med argumentet är noll. När vi tittar på
+potenser av två, kommer nollflaggan endast ställas in om de två talen inte är
+desamma. Till exempel är `0001 AND 0001` inte noll, men `0001 AND 0010` är noll.
+
+Vi undersöker `upKey`. Om den aktuella riktningen är nedåt (4), kommer bittestet
+vara noll. `BNE` betyder "hoppa om nollflaggan är nollställd", så i detta fall vi kommer
+hoppa till `illegalMove`, som bara återvänder till subrutinen. Annars
+lagras den nya riktningen (1 i detta fall) i en lämplig minnesadress.
 
 ####Updating the game state####
 
