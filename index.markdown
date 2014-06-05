@@ -717,6 +717,33 @@ simple. For example, to move right, just incrememnt the least significant byte
 (e.g. `$0200` becomes `$0201`). To go down, add `$20` (e.g. `$0200` becomes
 `$0220`). Left and up are the reverse.
 
+Längden initieras till `4`, så `X` börjar som `3`. `LDA $10,x` laddar
+värdet i `$13` in i `A`, sedan `STA $12,x` lagrar detta värde i `$15`. `X`
+minskas, och vi loopar. Nu är `X` lika med `2` , så vi laddar `$12` och sparar det i
+`$14`. Detta loopar så länge `X` är positivt (`BPL` betyder "hoppa om positivt").
+
+När värdena väl har skiftats ormen ned, måste vi räkna ut vad som ska
+göras med huvudet. Riktningen är laddas först in i `A`. `LSR` betyder "logisk
+skift höger", eller "flytta alla bitar ett steg åt höger". Den minst
+signifikanta biten skiftas in i carry-flaggan. Så om ackumulatorn är `1`,
+efter `LSR` är den `0`, med carry-flaggan satt (d.v.s. ettställd).
+
+För att testa om riktningen är `1`, `2`, `4` eller `8`, skiftar koden ständigt
+höger tills carry är satt. En `LSR` betyder "upp", två betyder "höger" o.s.v.
+
+Nästa bit uppdaterar ormens huvud beroende på riktning. Detta är
+förmodligen den mest komplicerade delen av koden, och det beror helt på hur
+minnesaddresser motsvarar skärmkoordinater. Så låt oss titta på det mer i detalj.
+
+Du kan tänka på skärmen som fyra horisontella band av 32 &times; 8 pixlar.
+Dessa remsor motsvarar `$0200-$02ff`, `$0300-$03ff`, `$0400-$04ff` och `$0500-$05ff`.
+De första raderna av bildpunkter är `$0200-$021f`, `$0220-$023f`, `$0240-$025f` o.s.v.
+
+Så länge man rör sig inom ett av dessa horisontella band, är saker
+enkla. Till exempel, för att flytta höger, öka bara den minst signifikanta byten
+(t.ex. `$0200` blir `$0201`). För att gå ner, lägg till `$20` (t.ex. `$0200` blir
+`$0220`). Vänster och uppåt är det omvända.
+
 Going between sections is more complicated, as we have to take into account the
 most significant byte as well. For example, going down from `$02e1` should lead
 to `$0301`. Luckily, this is fairly easy to accomplish. Adding `$20` to `$e1`
@@ -734,6 +761,23 @@ is done using a bit check against the mask `$1f`. Hopefully the illustration
 below will show you how masking out the lowest 5 bits reveals whether a number
 is a multiple of `$20` or not.
 
+Att gå mellan remsorna är mer komplicerat, eftersom vi även måste ta hänsyn till den
+mest signifikanta byten. Till exempel, att gå ner från `$02e1` bör leda
+till `$0301`. Lyckligtvis är det ganska lätt att åstadkomma. Att addera `$20` till `$e1`
+resulterar i `$01` och sätter carry-biten. Om carry-biten blev satt, vet vi att vi
+också måste öka den mest signifikanta byten.
+
+Efter ett steg i varje riktning, måste vi också kontrollera om huvudet
+skulle hamna utanför ramen. Detta hanteras på olika sätt för varje riktning. För
+vänster och höger, kan vi kontrollera om huvudet i praktiken har "gått
+runt". Att gå höger från `$021f` genom att öka den minst signifikanta byten
+skulle leda till `$0220`, men detta innebär faktiskt att hoppa från den sista pixeln i den
+första raden till den första pixeln i den andra raden. Så varje gång vi går åt höger,
+måste vi kontrollera om den nya minst signifikanta byten är en multipel av `$20`. Detta
+görs med hjälp av en bitkontroll mot masken `$1f`. Förhoppningsvis ska illustrationen
+nedan visa hur maskering av de lägsta 5 bitarna avslöja om ett tal
+är en multipel av `$20` eller inte.
+
     $20: 0010 0000
     $40: 0100 0000
     $60: 0110 0000
@@ -743,6 +787,8 @@ is a multiple of `$20` or not.
 I won't explain in depth how each of the directions work, but the above
 explanation should give you enough to work it out with a bit of study.
 
+Jag kommer inte att förklara ingående hur var och en av riktningarna fungerar, men
+förklaringen ovan bör ge dig tillräckligt för att reda ut det med lite studier.
 
 ####Rendering the game####
 
