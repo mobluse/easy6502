@@ -509,23 +509,6 @@ med väggen eller med sig själv.
 
 ###Nollsideanvändning###
 
-The zero page of memory is used to store a number of game state variables, as
-noted in the comment block at the top of the game. Everything in `$00`, `$01`
-and `$10` upwards is a pair of bytes representing a two-byte memory location
-that will be looked up using indirect addressing.  These memory locations will
-all be between `$0200` and `$05ff` - the section of memory corresponding to the
-simulator display. For example, if `$00` and `$01` contained the values `$01`
-and `$02`, they would be referring to the second pixel of the display (`$0201`
-- remember, the least significant byte comes first in indirect addressing).
-
-The first two bytes hold the location of the apple. This is updated every time
-the snake eats the apple. Byte `$02` contains the current direction. `1` means
-up, `2` right, `4` down, and `8` left.  The reasoning behind these numbers will
-become clear later.
-
-Finally, byte `$03` contains the current length of the snake, in terms of bytes
-in memory (so a length of 4 means 2 pixels).
-
 Minnets nollsida används för att lagra ett antal speltillståndsvariabler, som
 noteras i kommentarssektionen överst i spelet. Allt i `$00`, `$01`
 och `$10` och uppåt är par av bytes som representerar en två-byte minnesadress
@@ -541,9 +524,9 @@ upp, `2` höger, `4` ner, och `8` vänster. Resonemanget bakom dessa siffror kom
 att framgå senare.
 
 Slutligen, byte `$03` innehåller den aktuella längden på ormen, i form av antal byte
-i minnet (så att en längd av 4 betyder 2 bildpunkter).
+i minnet vid adressen `$10` (så att en längd på 4 betyder 2 bildpunkter).
 
-###Initialization###
+###Initialisering###
 
 The `init` subroutine defers to two subroutines, `initSnake` and
 `generateApplePosition`. `initSnake` sets the snake direction, length, and then
@@ -573,6 +556,35 @@ and `$15`. This leads to memory like this:
 which represents the indirectly-addressed memory locations `$0411`, `$0410` and
 `$04ff` (three pixels in the middle of the display). I'm labouring this point,
 but it's important to fully grok how indirect addressing works.
+
+`init`-subrutinen anropar två subrutiner: `initSnake` och
+`generateApplePosition`. `initSnake` ställer in ormens riktning, längd och
+laddar därefter de ursprungliga minnesadresserna för ormens huvud och kropp. Byte-paret vid
+`$10` innehåller huvudets skärmposition, och paret på `$12` innehåller
+positionen av det enda kroppssegmentet, och `$14` innehåller positionen av
+svansen (svansen är det sista segmentet av kroppen och ritas i svart för att hålla
+ormen i rörelse). Detta händer i följande kod:
+
+    lda #$11
+    sta $10
+    lda #$10
+    sta $12
+    lda #$0f
+    sta $14
+    lda #$04
+    sta $11
+    sta $13
+    sta $15
+
+Detta laddar värdet `$11` i minnesadress `$10`, värdet `$10` i
+`$12` och `$0f` i `$14`. Den laddar sedan värdet `$04` in `$11`, `$13`
+och `$15`. Detta leder till detta i minnet:
+
+    0010: 11 04 10 04 0f 04
+
+som representerar de indirekt-adresserade minnesadresserna `$0411`, `$0410` och
+`$040f` (tre pixlar i mitten av displayen). Jag betonar kanske denna sak överdrivet,
+men det är viktigt att till fullo greppa hur indirekt adressering fungerar.
 
 The next subroutine, `generateApplePosition`, sets the apple location to a
 random position on the display. First, it loads a random byte into the
