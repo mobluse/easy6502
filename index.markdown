@@ -646,49 +646,48 @@ desamma. Till exempel är `0001 AND 0001` inte noll, men `0001 AND 0010` är nol
 
 Vi undersöker `upKey`. Om den aktuella riktningen är nedåt (4), kommer bittestet
 vara noll. `BNE` betyder "hoppa om nollflaggan är nollställd", så i detta fall vi kommer
-hoppa till `illegalMove`, som bara återvänder till subrutinen. Annars
-lagras den nya riktningen (1 i detta fall) i en lämplig minnesadress.
+hoppa till `illegalMove`, som bara återvänder från subrutinen. Annars
+lagras den nya riktningen (1 i detta fall) på den avsedda minnesadressen.
 
-####Updating the game state####
+####Uppdatera speltillståndet####
 
-The next subroutine, `checkCollision`, defers to `checkAppleCollision` and
-`checkSnakeCollision`. `checkAppleCollision` just checks to see if the two
-bytes holding the location of the apple match the two bytes holding the
-location of the head. If they do, the length is increased and a new apple
-position is generated.
+Nästa subrutin, `checkCollision`,  anropar `checkAppleCollision` och 
+`checkSnakeCollision`. `checkAppleCollision` bara kontrollerar om de två 
+byte som lagrar positionen av äpplet matchar de två byte som lagrar 
+positionen av huvudet. Om de gör det, ökas längden och en ny äppleposition genereras. 
 
-`checkSnakeCollision` loops through the snake's body segments, checking each
-byte pair against the head pair. If there is a match, then game over.
+`checkSnakeCollision` loopar igenom ormens kroppssegment och kontrollerar varje 
+byte-par mot huvudparet. Om det finns en matchning, då är spelet över. 
 
-After collision detection, we update the snake's location. This is done at a
-high level like so: First, move each byte pair of the body up one position in
-memory. Second, update the head according to the current direction. Finally, if
-the head is out of bounds, handle it as a collision. I'll illustrate this with
-some ascii art. Each pair of brackets contains an x,y coordinate rather than a
-pair of bytes for simplicity.
+Efter kollisionsdetektering, uppdaterar vi ormens position. Detta görs på en 
+hög nivå som så här: För det första, flytta varje byte-par av kroppen upp en position i 
+minnet. För det andra, uppdatera huvuded enligt den aktuella riktningen. Slutligen, om 
+huvudet är utanför ramen, hantera det som en kollision. Jag ska illustrera detta med 
+lite ASCII-konst. Varje par av hakparenteser innehåller en x,y-koordinat snarare än ett 
+byte-par för enkelhets skull.
 
       0    1    2    3    4
-    Head                 Tail
+    Huvud               Svans
 
-    [1,5][1,4][1,3][1,2][2,2]    Starting position
+    [1,5][1,4][1,3][1,2][2,2]    Utgångsläge
 
-    [1,5][1,4][1,3][1,2][1,2]    Value of (3) is copied into (4)
+    [1,5][1,4][1,3][1,2][1,2]    Värdet av (3) kopieras in i (4)
 
-    [1,5][1,4][1,3][1,2][1,2]    Value of (2) is copied into (3)
+    [1,5][1,4][1,3][1,3][1,2]    Värdet av (2) kopieras in i (3)
 
-    [1,5][1,4][1,3][1,2][1,2]    Value of (1) is copied into (2)
+    [1,5][1,4][1,4][1,3][1,2]    Värdet av (1) kopieras in i (2) 
 
-    [1,5][1,4][1,3][1,2][1,2]    Value of (0) is copied into (1)
+    [1,5][1,5][1,4][1,3][1,2]    Värdet av (0) kopieras in i (1) 
 
-    [0,4][1,4][1,3][1,2][1,2]    Value of (0) is updated based on direction
+    [0,5][1,5][1,4][1,3][1,2]    Värdet av (0) uppdateras utifrån riktning
 
-At a low level, this subroutine is slightly more complex. First, the length is
-loaded into the `X` register, which is then decremented. The snippet below
-shows the starting memory for the snake.
+På en låg nivå, är denna subrutin något mer komplex. Först laddas längden 
+in i `X`-registret, som sedan minskas. Strängen nedan 
+visar utgångsminnet för ormen.
 
-    Memory location: $10 $11 $12 $13 $14 $15
+    Minnesadress: $10 $11 $12 $13 $14 $15
 
-    Value:           $11 $04 $10 $04 $0f $04
+    Värde:        $11 $04 $10 $04 $0f $04
 
 The length is initialized to `4`, so `X` starts off as `3`. `LDA $10,x` loads the
 value of `$13` into `A`, then `STA $12,x` stores this value into `$15`. `X` is
