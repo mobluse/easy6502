@@ -759,14 +759,14 @@ Det finns också en online-kurs i programspråket C för C64 som använder Linux
 se [*C Lernen mit cc65 und C64*](http://skoe.de/wiki/doku.php?id=ckurs:00-vorwort).
 
 Det finns böcker på svenska om 6502-programmering. Nyligen auktionerades en [barnbok 
-om 6502- och Z80-programmering ut på Tradera](http://www.tradera.com/programmering-i-maskinkod-handbok-for-hemdatorer-auktion_1105_207382740):
-"[Maskinkod och Assembler](http://libris.kb.se/bib/7652360)" av Lisa Watts och Mike Wharton.
-Jag har läst den och då lånade jag den från Malmö stadsbibliotek. Jag har länkat till 
-universitetsbibliotek men böckerna kan även finnas på folkbibliotek.
+om 6502- och Z80-programmering ut på Tradera](http://www.tradera.com/programmering-i-maskinkod-handbok-for-hemdatorer-auktion_1105_207382740):  
+"[Maskinkod och Assembler](http://libris.kb.se/bib/7652360)" av Lisa Watts och Mike Wharton.  
+Jag har läst den och då lånade jag den från Malmö stadsbibliotek.
 
-Andra böcker om 6502-programmering på svenska:
+Andra böcker om 6502-assembler på svenska:  
 "[Programmera 6502](http://libris.kb.se/bib/549594)" av Rodnay Zaks.  
-"[Mastercod för VIC-64](http://libris.kb.se/bib/7666570)" av David Lawrence och Mark England.
+"[Mastercod för VIC-64](http://libris.kb.se/bib/7666570)" av David Lawrence och Mark England.  
+Jag har länkat till universitetsbibliotek men böckerna kan även finnas på folkbibliotek.
 
 Det finns ett forum för programmering av Commodore 64 på svenska och där kan man 
 också få hjälp med sina program i 6502-assembler eller C,
