@@ -4,14 +4,13 @@
 ; \__ \ ' \/ _` | / / -_) _ \__ \ () / /
 ; |___/_||_\__,_|_\_\___\___/___/\__/___|
 
-; Change direction: W A S D
+; Ändra riktning: W A S D
 
-; $00-01 => screen location of apple
-; $10-11 => screen location of snake head
-; $12-?? => snake body (in byte pairs)
-; $02    => direction (1 => up, 2 => right, 4 => down, 8 => left)
-; $03    => snake length
-
+; $00-01 => äpplets bildminnesadress 
+; $10-11 => ormhuvudets bildminnesadress
+; $12-?? => ormkropp (i byte parvis)
+; $02    => riktning (1 => upp, 2 => höger, 4 => ner, 8 => vänster)
+; $03    => ormlängd
 
   jsr init
   jsr loop
@@ -23,9 +22,9 @@ init:
 
 
 initSnake:
-  lda #2  ;start direction
+  lda #2  ;ursprunglig rikting
   sta $02
-  lda #4  ;start length
+  lda #4  ;ursprunglig length
   sta $03
   lda #$11
   sta $10
@@ -41,13 +40,13 @@ initSnake:
 
 
 generateApplePosition:
-  ;load a new random byte into $00
+  ;ladda en ny slumpmässig byte in i $00
   lda $fe
   sta $00
 
-  ;load a new random number from 2 to 5 into $01
+  ;ladda in ett nytt slumpmässigt tal mellan 2 och 5 in i $01
   lda $fe
-  and #$03 ;mask out lowest 2 bits
+  and #$03 ;maska ut de 2 lägsta bitarna
   clc
   adc #2
   sta $01
@@ -126,16 +125,16 @@ checkAppleCollision:
   cmp $11
   bne doneCheckingAppleCollision
 
-  ;eat apple
+  ;ät äpplet
   inc $03
-  inc $03 ;increase length
+  inc $03 ;öka längden
   jsr generateApplePosition
 doneCheckingAppleCollision:
   rts
 
 
 checkSnakeCollision:
-  ldx #2 ;start with second segment
+  ldx #2 ;börja med andra segmentet
 snakeCollisionLoop:
   lda $10,x
   cmp $10
@@ -149,7 +148,7 @@ maybeCollided:
 continueCollisionLoop:
   inx
   inx
-  cpx $03          ;got to last section with no collision
+  cpx $03          ;gå till sista avsnittet utan kollision
   beq didntCollide
   jmp snakeCollisionLoop
 
@@ -160,7 +159,7 @@ didntCollide:
 
 
 updateSnake:
-  ldx $03 ;location of length
+  ldx $03 ;längdens lagringsutrymme
   dex
   txa
 updateloop:
