@@ -12,7 +12,7 @@ Så, varför skulle du vilja lära dig 6502? Det är ett dött språk, eller hur
 
 Allvarligt talat, jag tycker det är värdefullt att ha en förståelse för assembler. Assembler är den lägsta nivån av abstraktion i datorer - den punkt där koden är fortfarande läsbar. Assembler översätter direkt till byte som sedan utförs av datorns processor. Om du förstår hur det fungerar, har du i princip blivit en [datortrollkarl](http://skilldrick.co.uk/2011/04/magic-in-software-development/).
 
-Varför 6502? Varför inte ett *användbart* assemblerspråk, som [x86](http://sv.wikipedia.org/wiki/X86)? Tja, jag tror inte att lära x86 är användbart. Jag tror inte att du någonsin kommer att behöva skriva assembler i ditt vanliga jobb - det är enbart en akademisk övning, något att utöka ditt sinne och ditt tänkande med. 6502 skrevs ursprungligen i en annan tid, en tid då de flesta av utvecklarna skrev assembler direkt, i stället för i dessa nymodiga högnivåprogrammeringsspråk. Så de var konstruerade för att skrivas av människor. Mer moderna assemblerspråk är tänkta att skrivas av kompilatorer, så låt oss lämna det till dem. Dessutom är 6502 *kul*. Ingen har någonsin kallat x86 *kul*.
+Varför 6502? Varför inte ett *användbart* assemblerspråk, som [x86](http://sv.wikipedia.org/wiki/X86)? Tja, jag tror inte att lära x86 är användbart. Jag tror inte att du någonsin kommer att behöva skriva assembler i ditt vanliga jobb - det är enbart en akademisk övning, något att utöka ditt sinne och ditt tänkande med. 6502 skrevs ursprungligen i en annan tid, en tid då de flesta av utvecklarna skrev assembler direkt, i stället för i dessa nymodiga högnivåprogrammeringsspråk. Så de var konstruerade för att skrivas av människor. Mer moderna assemblerspråk är tänkta att skrivas av kompilatorer, så låt oss lämna det till dem. Dessutom är 6502 *kul*. Ingen har någonsin kallat x86 *kul*.
 
 
 <h2 id="first-program">Vårt första program</h2>
@@ -464,10 +464,10 @@ illustrerar hur `JSR` och `RTS` kan användas tillsammans för att skapa modulä
 <h2 id='snake'>Skapa ett spel</h2>
 
 Låt oss nu se till att all denna kunskap kommer till nytta, och göra ett spel! Vi ska 
-göra en riktigt enkel version av det klassiska spelet "Masken" (en. "Snake").
+göra en riktigt enkel version av det klassiska spelet "Masken"/"Ormen" (en. "Snake").
 
 Simulator-fönstret nedan innehåller hela källkoden till spelet. Jag ska 
-förklara hur det fungerar i de följande avsnitten. 
+förklara hur det fungerar i de följande avsnitten. I detta program är etiketterna på originalspråket: engelska.
 
 [Willem van der Jagt](https://twitter.com/wkjagt) har gjort en [fullständigt kommenterad *gist*
 av denna källkod](https://gist.github.com/wkjagt/9043907) (på engelska), så följ med 
@@ -583,43 +583,11 @@ först med indirekt adressering, leder detta till en minnesadress mellan
 
 ###Spel-loopen###
 
-Nearly all games have at their heart a game loop. All game loops have the same
-basic form: accept user input, update the game state, and render the game
-state. This loop is no different.
-
-Nästan alla spel har i sitt hjärta en spel-loop. Alla spel-loopar har samma 
+Nästan alla spel har i sin kärna en spel-loop. Alla spel-loopar har samma 
 grundläggande form: acceptera användarinmatning, uppdatera speltillståndet, och rita 
 speltillståndet. Denna loop är inte annorlunda.
 
 ####Läs inmatningen####
-
-The first subroutine, `readKeys`, takes the job of accepting user input. The
-memory location `$ff` holds the ascii code of the most recent key press in this
-simulator. The value is loaded into the accumulator, then compared to `$77`
-(the hex code for W), `$64` (D), `$73` (S) and `$61`. If any of these
-comparisons are successful, the program branches to the appropriate section.
-Each section (`upKey`, `rightKey`, etc.) first checks to see if the current
-direction is the opposite of the new direction. This requires another little detour.
-
-As stated before, the four directions are represented internally by the numbers
-1, 2, 4 and 8. Each of these numbers is a power of 2, thus they are represented
-by a binary number with a single `1`:
-
-    1 => 0001 (up)
-    2 => 0010 (right)
-    4 => 0100 (down)
-    8 => 1000 (left)
-
-The `BIT` opcode is similar to `AND`, but the calculation is only used to set
-the zero flag - the actual result is discarded. The zero flag is set only if the
-result of AND-ing the accumulator with argument is zero. When we're looking at
-powers of two, the zero flag will only be set if the two numbers are not the
-same. For example, `0001 AND 0001` is not zero, but `0001 AND 0010` is zero.
-
-So, looking at `upKey`, if the current direction is down (4), the bit test will
-be zero. `BNE` means "branch if the zero flag is clear", so in this case we'll
-branch to `illegalMove`, which just returns from the subroutine. Otherwise, the
-new direction (1 in this case) is stored in the appropriate memory location.
 
 Den första subrutinen, `readKeys`, tar på sig jobbet att acceptera användarinmatningen. 
 Minnesadressen `$ff` lagrar ASCII-koden för den senaste knapptryckningen i denna
@@ -644,7 +612,7 @@ resultatet av att AND-a ackumulatorn med argumentet är noll. När vi tittar på
 potenser av två, kommer nollflaggan endast ställas in om de två talen inte är
 desamma. Till exempel är `0001 AND 0001` inte noll, men `0001 AND 0010` är noll.
 
-Vi undersöker `upKey`. Om den aktuella riktningen är nedåt (4), kommer bittestet
+Vi undersöker fallet `upKey`. Om den aktuella riktningen är nedåt (4), kommer bittestet
 vara noll. `BNE` betyder "hoppa om nollflaggan är nollställd", så i detta fall vi kommer
 hoppa till `illegalMove`, som bara återvänder från subrutinen. Annars
 lagras den nya riktningen (1 i detta fall) på den avsedda minnesadressen.
@@ -688,34 +656,6 @@ visar utgångsminnet för ormen.
     Minnesadress: $10 $11 $12 $13 $14 $15
     
     Värde:        $11 $04 $10 $04 $0f $04
-
-The length is initialized to `4`, so `X` starts off as `3`. `LDA $10,x` loads the
-value of `$13` into `A`, then `STA $12,x` stores this value into `$15`. `X` is
-decremented, and we loop. Now `X` is `2`, so we load `$12` and store it into
-`$14`. This loops while `X` is positive (`BPL` means "branch if positive").
-
-Once the values have been shifted down the snake, we have to work out what to
-do with the head. The direction is first loaded into `A`. `LSR` means "logical
-shift right", or "shift all the bits one position to the right". The least
-significant bit is shifted into the carry flag, so if the accumulator is `1`,
-after `LSR` it is `0`, with the carry flag set.
-
-To test whether the direction is `1`, `2`, `4` or `8`, the code continually
-shifts right until the carry is set. One `LSR` means "up", two means "right",
-and so on.
-
-The next bit updates the head of the snake depending on the direction. This is
-probably the most complicated part of the code, and it's all reliant on how
-memory locations map to the screen, so let's look at that in more detail.
-
-You can think of the screen as four horizontal strips of 32 &times; 8 pixels.
-These strips map to `$0200-$02ff`, `$0300-$03ff`, `$0400-$04ff` and `$0500-$05ff`.
-The first rows of pixels are `$0200-$021f`, `$0220-$023f`, `$0240-$025f`, etc.
-
-As long as you're moving within one of these horizontal strips, things are
-simple. For example, to move right, just incrememnt the least significant byte
-(e.g. `$0200` becomes `$0201`). To go down, add `$20` (e.g. `$0200` becomes
-`$0220`). Left and up are the reverse.
 
 Längden initieras till `4`, så `X` börjar som `3`. `LDA $10,x` laddar
 värdet i `$13` in i `A`, sedan `STA $12,x` lagrar detta värde i `$15`. `X`
