@@ -10,9 +10,9 @@ Så, varför skulle du vilja lära dig 6502? Det är ett dött språk, eller hur
 
 (Faktiskt, jag har fått tillförlitlig information om att 6502-processorer fortfarande produceras av [Western Design Center (WDC)](http://65xx.com/Developer_Products/65xx-chips/), så uppenbarligen är 6502 *inte* ett dött språk! Vem kunde tro det?)
 
-Allvarligt talat, jag tycker det är värdefullt att ha en förståelse för assembler. Assembler är den lägsta nivån av abstraktion i datorer - den punkt där koden är fortfarande läsbar. Assembler översätter direkt till byte som sedan utförs av datorns processor. Om du förstår hur det fungerar, har du i princip blivit en [datortrollkarl](http://skilldrick.co.uk/2011/04/magic-in-software-development/).
+Allvarligt talat, jag tycker det är värdefullt att ha en förståelse för assembler. Assembler är den lägsta nivån av abstraktion i datorer - den punkt där koden fortfarande är läsbar. Assembler översätter direkt till byte som sedan utförs av datorns processor. Om du förstår hur det fungerar, har du i princip blivit en [datortrollkarl](http://skilldrick.co.uk/2011/04/magic-in-software-development/).
 
-Varför 6502? Varför inte ett *användbart* assemblerspråk, som [x86](http://sv.wikipedia.org/wiki/X86)? Tja, jag tror inte att lära x86 är användbart. Jag tror inte att du någonsin kommer att behöva skriva assembler i ditt vanliga jobb - det är enbart en akademisk övning, något att utöka ditt sinne och ditt tänkande med. 6502 skrevs ursprungligen i en annan tid, en tid då de flesta av utvecklarna skrev assembler direkt, i stället för i dessa nymodiga högnivåprogrammeringsspråk. Så de var konstruerade för att skrivas av människor. Mer moderna assemblerspråk är tänkta att skrivas av kompilatorer, så låt oss lämna det till dem. Dessutom är 6502 *kul*. Ingen har någonsin kallat x86 *kul*.
+Varför 6502? Varför inte ett *användbart* assemblerspråk, som [x86](http://sv.wikipedia.org/wiki/X86)? Tja, jag tror inte att lära x86 är användbart. Jag tror inte att du någonsin kommer att behöva skriva assembler i ditt vanliga jobb - det är enbart en akademisk övning, något att utöka ditt sinne och ditt tänkande med. 6502 skrevs ursprungligen i en annan tid, en tid då de flesta av utvecklarna skrev assembler direkt, i stället för i dessa nymodiga högnivåprogrammeringsspråk. Så de var konstruerade för att skrivas av människor. Mer moderna assemblerspråk är tänkta att skrivas av kompilatorer, så låt oss lämna det till dem. Dessutom är 6502 *kul*. Ingen har någonsin kallat x86 *kul*.
 
 
 <h2 id="first-program">Vårt första program</h2>
@@ -35,7 +35,7 @@ uppe till vänster. (Om detta inte fungerar, behöver du förmodligen uppgradera
 en mer modern, som Chrome eller Firefox.) 
 
 Alltså, vad gör det här programmet egentligen? Låt oss gå igenom den med 
-debuggern. Klicka **Reset**, kryssa sedan i **Debugger** kryssrutan för att starta 
+debuggern. Klicka **Reset**, kryssa sedan i **Debugger**-kryssrutan för att starta 
 debuggern. Klicka **Step** en gång. Om du tittade noga, bör du ha 
 märkt att `A=` ändras från `$00` till `$01` och `PC=` ändras från `$0600` till 
 `$0602`.
