@@ -732,14 +732,30 @@ snabbt annars. Allt `spinWheels` gör är att räkna ner `X` från noll tills de
 noll igen. Den första `dex` slår runt, vilket gör `X` lika med `#$ff`.
 
 <h2 id="further">Gå vidare</h2>
-Man kan lära sig mer om 6502-assembler för specifikt (emulerad) Commodore 64 men 
+
+6502 är en tidig, populär processor från 70-talet som också är liten: ca 3500 transistorer 
+([Z80](http://sv.wikipedia.org/wiki/Zilog_Z80) har ca 8500; [i386](http://sv.wikipedia.org/wiki/Intel_80386), ca 275000; [ARMv7-A](http://en.wikipedia.org/wiki/ARM_Cortex-A9), ca 26000000). Man kan lätt få in en 6502 i en 
+[FPGA](http://sv.wikipedia.org/wiki/Field-programmable_gate_array)-krets, men jag vet inte om den är den bästa processorn i sin storleksklass för 
+FPGA. Hur som helst, anledningen till att jag valde att göra en resurs som lär ut
+6502 var att jag hittade webbplatsen som jag översatte och att processorn är väl 
+utforskad på 
+t.ex. [http://www.visual6502.org/JSSim/](http://www.visual6502.org/JSSim/) 
+(några som löste upp en 6502 i syra). Det finns även andra inlärningsresurser för 6502, 
+t.ex. [http://jbit.sourceforge.net/](http://jbit.sourceforge.net/)
+som finns för mobiler med J2ME/Java ME, datorer med Linux och Windows, m.fl. system, 
+se [https://github.com/efornara/jbit/wiki](https://github.com/efornara/jbit/wiki). 
+Dessutom kan man köpa en begagnad Commodore 64 (C64) inklusive bandspelare för ca 200 kr 
+på auktionswebbplatser. Man kan sedan använda en kassettadapter för bilstereo för 
+att överföra programmen från en PC:s hörlursutgång till C64:an.
+
+Man kan lära sig mer om 6502-assembler för specifikt (emulerad) C64 men 
 på engelska,
 se [http://digitalerr0r.wordpress.com/category/commodore-64/](http://digitalerr0r.wordpress.com/category/commodore-64/). Börja med inlägget längst ner. Kursen är visserligen för Windows men jag har även 
 kunnat köra den i Linux för x86 och den fungerar troligen även på Mac OS X för x86.
 
-Det finns också en online-kurs i programspråket C på tyska,
-se [C Lernen mit cc65 und C64](http://skoe.de/wiki/doku.php?id=ckurs:00-vorwort).
+Det finns också en online-kurs i programspråket C för C64 som använder Linux men på tyska,
+se [*C Lernen mit cc65 und C64*](http://skoe.de/wiki/doku.php?id=ckurs:00-vorwort).
 
 Det finns ett forum för programmering av Commodore 64 på svenska och där kan man 
 också få hjälp med sina program i 6502-assembler eller C,
-se [Commodore 64 ‹ Programmering/prog.-verktyg](http://commodore64.se/forum/viewforum.php?f=10).
+se [*Commodore 64 ‹ Programmering/prog.-verktyg*](http://commodore64.se/forum/viewforum.php?f=10).
