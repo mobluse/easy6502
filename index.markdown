@@ -507,7 +507,7 @@ processorn att göra en del fördröjningsarbete, för att hindra spelet från a
 på det som ett sov-kommando. Spelet fortsätter att köra tills ormen kolliderar
 med väggen eller med sig själv.
 
-###Nollsideanvändning###
+###Hur nollsidan används###
 
 Minnets nollsida används för att lagra ett antal speltillståndsvariabler, som
 noteras i kommentarssektionen överst i spelet. Allt i `$00`, `$01`
@@ -526,7 +526,7 @@ att framgå senare.
 Slutligen, byte `$03` innehåller den aktuella längden på ormen, i form av antal byte
 i minnet vid adressen `$10` (så att en längd på 4 betyder 2 bildpunkter).
 
-###Initialisering###
+###Initialisera###
 
 `init`-subrutinen anropar två subrutiner: `initSnake` och
 `generateApplePosition`. `initSnake` ställer in ormens riktning, längd och
@@ -591,7 +591,7 @@ Nästan alla spel har i sitt hjärta en spel-loop. Alla spel-loopar har samma
 grundläggande form: acceptera användarinmatning, uppdatera speltillståndet, och rita 
 speltillståndet. Denna loop är inte annorlunda.
 
-####Att läsa inmatningen####
+####Läs inmatningen####
 
 The first subroutine, `readKeys`, takes the job of accepting user input. The
 memory location `$ff` holds the ascii code of the most recent key press in this
@@ -771,25 +771,6 @@ Jag kommer inte att förklara ingående hur varje riktning fungerar, men
 förklaringen ovan bör ge dig tillräckligt för att kunna reda ut det med lite iakttagelser.
 
 ####Rita upp spelet####
-
-Because the game state is stored in terms of pixel locations, rendering the
-game is very straightforward. The first subroutine, `drawApple`, is extremely
-simple. It sets `Y` to zero, loads a random colour into the accumulator, then
-stores this value into `($00),y`. `$00` is where the location of the apple is
-stored, so `($00),y` dereferences to this memory location. Read the "Indirect
-indexed" section in [Addressing modes](#addressing) for more details.
-
-Next comes `drawSnake`. This is pretty simple too. `X` is set to zero and `A`
-to one. We then store `A` at `($10,x)`. `$10` stores the two-byte location of
-the head, so this draws a white pixel at the current head position. Next we
-load `$03` into `X`. `$03` holds the length of the snake, so `($10,x)` in this
-case will be the location of the tail. Because `A` is zero now, this draws a
-black pixel over the tail. As only the head and the tail of the snake move,
-this is enough to keep the snake moving.
-
-The last subroutine, `spinWheels`, is just there because the game would run too
-fast otherwise. All `spinWheels` does is count `X` down from zero until it hits
-zero again. The first `dex` wraps, making `X` `#$ff`.
 
 Eftersom speltillståndet lagras i termer av pixeladresser, är uppritningen av
 spelet mycket enkel. Den första subrutinen, `drawApple`, är extremt
