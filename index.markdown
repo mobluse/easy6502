@@ -756,7 +756,7 @@ Börja med inlägget längst ner. Kursen är visserligen för Windows men jag ha
 kunnat köra den i Linux för x86 och den fungerar troligen även på Mac OS X för x86.
 
 Det finns också en online-kurs i programspråket C för C64 som använder Linux men på tyska,
-se [*C Lernen mit cc65 und C64*](http://skoe.de/wiki/doku.php?id=ckurs:00-vorwort).
+se [*C&nbsp;Lernen mit cc65 und C64*](http://skoe.de/wiki/doku.php?id=ckurs:00-vorwort).
 
 Det finns böcker på svenska om 6502-programmering. Nyligen auktionerades en [barnbok 
 om 6502- och Z80-programmering ut på Tradera](http://www.tradera.com/programmering-i-maskinkod-handbok-for-hemdatorer-auktion_1105_207382740):  
