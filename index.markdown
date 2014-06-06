@@ -461,7 +461,7 @@ nästa instruktion, `JSR avsluta`, som hoppar till slutet av filen. Detta
 illustrerar hur `JSR` och `RTS` kan användas tillsammans för att skapa modulär kod.
 
 
-<h2 id='snake'>Att skapa ett spel</h2>
+<h2 id='snake'>Skapa ett spel</h2>
 
 Låt oss nu se till att all denna kunskap kommer till nytta, och göra ett spel! Vi ska 
 göra en riktigt enkel version av det klassiska spelet "Masken" (en. "Snake").
