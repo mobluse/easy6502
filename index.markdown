@@ -4,7 +4,7 @@ layout: default
 
 <h2 id="intro">Introduktion</h2>
 
-I denna lilla bok jag ska visa dig hur du kommer igång att skriva 6502-assembler. 6502-processorn var massivt populär på sjuttio- och åttiotalet, och drev kända datorer som [BBC Micro](http://sv.wikipedia.org/wiki/BBC_Micro), [Atari 2600](http://sv.wikipedia.org/wiki/Atari_2600), [Commodore 64](http://sv.wikipedia.org/wiki/Commodore_64), [Apple II](http://sv.wikipedia.org/wiki/Apple_II), och [Nintendo Entertainment System (NES)](http://sv.wikipedia.org/wiki/Nintendo_Entertainment_System). Bender i Futurama [har en 6502-processor som hjärna](http://www.transbyte.org/SID/SID-files/Bender_6502.jpg). [Även Terminator programmerades i 6502](http://www.pagetable.com/docs/terminator/00-37-23.jpg).
+I denna lilla bok jag ska visa dig hur du kommer igång att skriva 6502-assembler. 6502-processorn var massivt populär på sjuttio- och åttiotalet, och drev kända datorer som [BBC Micro](http://sv.wikipedia.org/wiki/BBC_Micro), [Atari 2600](http://sv.wikipedia.org/wiki/Atari_2600), [VIC-20](http://sv.wikipedia.org/wiki/Commodore_VIC-20), [Commodore 64](http://sv.wikipedia.org/wiki/Commodore_64), [Apple II](http://sv.wikipedia.org/wiki/Apple_II), och [Nintendo Entertainment System (NES)](http://sv.wikipedia.org/wiki/Nintendo_Entertainment_System). Bender i Futurama [har en 6502-processor som hjärna](http://www.transbyte.org/SID/SID-files/Bender_6502.jpg). [Även Terminator programmerades i 6502](http://www.pagetable.com/docs/terminator/00-37-23.jpg).
 
 Så, varför skulle du vilja lära dig 6502? Det är ett dött språk, eller hur? Tja, det är latin också. Och de lär fortfarande ut det. [Q.E.D.](http://sv.wikipedia.org/wiki/Quod_erat_demonstrandum)
 
