@@ -770,7 +770,7 @@ nedan visa hur maskering av de lägsta 5 bitarna avslöja om ett tal
 Jag kommer inte att förklara ingående hur varje riktning fungerar, men
 förklaringen ovan bör ge dig tillräckligt för att kunna reda ut det med lite iakttagelser.
 
-####Rendering the game####
+####Rita upp spelet####
 
 Because the game state is stored in terms of pixel locations, rendering the
 game is very straightforward. The first subroutine, `drawApple`, is extremely
@@ -790,3 +790,22 @@ this is enough to keep the snake moving.
 The last subroutine, `spinWheels`, is just there because the game would run too
 fast otherwise. All `spinWheels` does is count `X` down from zero until it hits
 zero again. The first `dex` wraps, making `X` `#$ff`.
+
+Eftersom speltillståndet lagras i termer av pixeladresser, är uppritningen av
+spelet mycket enkel. Den första subrutinen, `drawApple`, är extremt
+enkel. Den sätter `Y` till noll, laddar en slumpmässig färg i ackumulatorn, sen
+lagrar den detta värde i `($00),y`. `$00` är där äpplets adress
+lagras, så `($00),y` avrefereras till denna minnesadress. Läs avsnittet "Indirekt
+indexerad" i [Adresseringssätt](#addressing) för mer information.
+
+Härnäst kommer `drawSnake`. Denna är också ganska enkel. `X` sätts till noll och `A`
+till ett. Vi lagrar sedan `A` i `($10,x)`. `$10` lagrar huvudets två byte-adress,
+så det ritar en vit pixel på den aktuella huvudpositionen. Därefter laddar vi
+`$03` i `X`. `$03` lagrar längden på ormen, så `($10,x)` kommer i detta
+fall att vara läget för svansen. Eftersom `A` är noll nu, ritar detta en
+svart pixel över svansen. Eftersom bara huvudet och svansen på ormen flyttas,
+är detta tillräckligt för att hålla ormen i rörelse.
+
+Den sista subrutinen, `spinWheels`, är bara där för att spelet skulle gå för
+snabbt annars. Allt `spinWheels` gör är att räkna ner `X` från noll tills den blir
+noll igen. Den första `dex` slår runt, vilket gör `X` lika med `#$ff`.
