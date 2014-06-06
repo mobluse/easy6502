@@ -730,3 +730,12 @@ svart pixel över svansen. Eftersom bara huvudet och svansen på ormen flyttas,
 Den sista subrutinen, `spinWheels`, är bara där för att spelet skulle gå för
 snabbt annars. Allt `spinWheels` gör är att räkna ner `X` från noll tills den blir
 noll igen. Den första `dex` slår runt, vilket gör `X` lika med `#$ff`.
+
+<h2 id="further">Gå vidare</h2>
+Man kan lära sig mer om assembler för specifikt Commodore 64 men på engelska, se   http://digitalerr0r.wordpress.com/category/commodore-64/. Börja med inlägget längst ner. Kursen är visserligen för Windows men jag har även kunnat köra den i Linux för x86.
+
+Det finns också en online-kurs i lågnivå C (cc65) på tyska, se  
+http://skoe.de/wiki/doku.php?id=ckurs:00-vorwort.
+
+Det finns ett forum för programmering av Commodore 64 på svenska och där kan man också få hjälp med sina program i 6502-assembler eller C, se  
+http://commodore64.se/forum/viewforum.php?f=10.
