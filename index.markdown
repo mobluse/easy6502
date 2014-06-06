@@ -732,10 +732,10 @@ snabbt annars. Allt `spinWheels` gör är att räkna ner `X` från noll tills de
 noll igen. Den första `dex` slår runt, vilket gör `X` lika med `#$ff`.
 
 <h2 id="further">Gå vidare</h2>
-Man kan lära sig mer om assembler för specifikt Commodore 64 men på engelska, se   http://digitalerr0r.wordpress.com/category/commodore-64/. Börja med inlägget längst ner. Kursen är visserligen för Windows men jag har även kunnat köra den i Linux för x86.
+Man kan lära sig mer om 6502-assembler för specifikt Commodore 64 (med emulator) men på engelska, se   [http://digitalerr0r.wordpress.com/category/commodore-64/](http://digitalerr0r.wordpress.com/category/commodore-64/). Börja med inlägget längst ner. Kursen är visserligen för Windows men jag har även kunnat köra den i Linux för x86 och den fungerar troligen även på Mac OS X för x86.
 
 Det finns också en online-kurs i lågnivå C (cc65) på tyska, se  
-http://skoe.de/wiki/doku.php?id=ckurs:00-vorwort.
+[C Lernen mit cc65 und C64](http://skoe.de/wiki/doku.php?id=ckurs:00-vorwort).
 
 Det finns ett forum för programmering av Commodore 64 på svenska och där kan man också få hjälp med sina program i 6502-assembler eller C, se  
-http://commodore64.se/forum/viewforum.php?f=10.
+[Forumindex ‹ Commodore 64 ‹ Programmering/prog.-verktyg](http://commodore64.se/forum/viewforum.php?f=10).
