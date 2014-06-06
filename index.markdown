@@ -97,7 +97,7 @@ LDA #$c0  ;Ladda hex värde c0 in i A-registret
 TAX       ;Transferera (d.v.s. överför) värdet i A till X
 INX       ;INkrementera (d.v.s. öka) värdet i X-registret
 ADC #$c4  ;ADdera med Carry hexvärde c4 till A-registret
-BRK       ;Break - vi är klara
+BRK       ;BReaK - vi är klara
 {% include end.html %}
 
 Assemblera koden, slå sedan på debuggern och stega igenom koden, titta
