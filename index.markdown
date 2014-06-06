@@ -469,8 +469,8 @@ göra en riktigt enkel version av det klassiska spelet "Masken" (en. "Snake").
 Simulator-fönstret nedan innehåller hela källkoden till spelet. Jag ska 
 förklara hur det fungerar i de följande avsnitten. 
 
-[Willem van der Jagt](https://twitter.com/wkjagt) har gjort en [fullständigt kommenterad gist
-av denna källkod](https://gist.github.com/wkjagt/9043907), så följ med 
+[Willem van der Jagt](https://twitter.com/wkjagt) har gjort en [fullständigt kommenterad *gist*
+av denna källkod](https://gist.github.com/wkjagt/9043907) (på engelska), så följ med 
 i den för fler detaljförklaringar.
 
 {% include snake.html %}
