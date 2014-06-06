@@ -733,7 +733,8 @@ noll igen. Den första `dex` slår runt, vilket gör `X` lika med `#$ff`.
 
 <h2 id="further">Gå vidare</h2>
 
-6502 är en tidig, populär processor från 70-talet som också är liten: ca 3500 transistorer 
+Hela detta avsnitt är författat av översättaren. 6502 är en tidig, populär processor från
+70-talet som också är liten: ca 3500 transistorer 
 ([Z80](http://sv.wikipedia.org/wiki/Zilog_Z80) har ca 8500; [i386](http://sv.wikipedia.org/wiki/Intel_80386), ca 275000; [ARMv7-A](http://en.wikipedia.org/wiki/ARM_Cortex-A9), ca 26000000). Man kan lätt få in en 6502 i en 
 [FPGA](http://sv.wikipedia.org/wiki/Field-programmable_gate_array)-krets, men jag vet inte om den är den bästa processorn i sin storleksklass för 
 FPGA. Hur som helst, anledningen till att jag valde att göra en resurs som lär ut
@@ -750,11 +751,22 @@ att överföra programmen från en PC:s hörlursutgång till C64:an.
 
 Man kan lära sig mer om 6502-assembler för specifikt (emulerad) C64 men 
 på engelska,
-se [http://digitalerr0r.wordpress.com/category/commodore-64/](http://digitalerr0r.wordpress.com/category/commodore-64/). Börja med inlägget längst ner. Kursen är visserligen för Windows men jag har även 
+se [http://digitalerr0r.wordpress.com/category/commodore-64/](http://digitalerr0r.wordpress.com/category/commodore-64/).
+Börja med inlägget längst ner. Kursen är visserligen för Windows men jag har även 
 kunnat köra den i Linux för x86 och den fungerar troligen även på Mac OS X för x86.
 
 Det finns också en online-kurs i programspråket C för C64 som använder Linux men på tyska,
 se [*C Lernen mit cc65 und C64*](http://skoe.de/wiki/doku.php?id=ckurs:00-vorwort).
+
+Det finns böcker på svenska om 6502-programmering. Nyligen auktionerades en [barnbok 
+om 6502- och Z80-programmering ut på Tradera](http://www.tradera.com/programmering-i-maskinkod-handbok-for-hemdatorer-auktion_1105_207382740):
+"[Maskinkod och Assembler](http://libris.kb.se/bib/7652360)" av Lisa Watts och Mike Wharton.
+Jag har läst den och då lånade jag den från Malmö stadsbibliotek. Jag har länkat till 
+universitetsbibliotek men böckerna kan även finnas på folkbibliotek.
+
+Andra böcker om 6502-programmering på svenska:
+"[Programmera 6502](http://libris.kb.se/bib/549594)" av Rodnay Zaks.  
+"[Mastercod för VIC-64](http://libris.kb.se/bib/7666570)" av David Lawrence och Mark England.
 
 Det finns ett forum för programmering av Commodore 64 på svenska och där kan man 
 också få hjälp med sina program i 6502-assembler eller C,
