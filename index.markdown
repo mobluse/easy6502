@@ -748,16 +748,17 @@ t.ex. [http://www.visual6502.org/JSSim/](http://www.visual6502.org/JSSim/)
 t.ex. [http://jbit.sourceforge.net/](http://jbit.sourceforge.net/)
 som finns för mobiler med J2ME/Java ME, datorer med Linux och Windows, m.fl. system, 
 se [https://github.com/efornara/jbit/wiki](https://github.com/efornara/jbit/wiki). 
-Dessutom kan man köpa en begagnad Commodore 64 (C64) inklusive bandspelare för ca 200 kr 
+Dessutom kan man köpa en begagnad Commodore 64 (C64) inklusive bandspelare för endast ca 200 kr 
 på auktionswebbplatser. Man kan sedan använda en kassettadapter för bilstereo för 
-att överföra programmen från en PC:s hörlursutgång till C64:an. Det går även att
-göra spel till 8-bitars NES, se [*Game Development for the 8-bit NES*](http://bobrost.com/nes/).
+att överföra programmen från en PC:s hörlursutgång till C64:an.
 
 Man kan lära sig mer om 6502-assembler för specifikt (emulerad) C64 men 
 på engelska,
 se [http://digitalerr0r.wordpress.com/category/commodore-64/](http://digitalerr0r.wordpress.com/category/commodore-64/).
 Börja med inlägget längst ner. Kursen är visserligen för Windows men jag har även 
 kunnat köra den i Linux för x86 och den fungerar troligen även på Mac OS X för x86.
+Det går även att utveckla spel till 8-bitars NES,
+se [*Game Development for the 8-bit NES*](http://bobrost.com/nes/).
 
 Det finns också en online-kurs i programspråket C för C64 som använder Linux men på tyska,
 se [*C&nbsp;Lernen mit cc65 und C64*](http://skoe.de/wiki/doku.php?id=ckurs:00-vorwort).
