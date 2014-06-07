@@ -93,9 +93,9 @@ Alla instruktioner tar noll eller ett argument. Här är några kommenterade
 källkoder för att introducera några olika instruktioner:
 
 {% include start.html %}
-LDA #$c0  ;Ladda hex värde c0 in i A-registret
-TAX       ;Transferera (d.v.s. överför) värdet i A till X
-INX       ;INkrementera (d.v.s. öka) värdet i X-registret
+LDA #$c0  ;LaDda A-registret med hex värde c0 
+TAX       ;Transferera/överför värdet i A till X
+INX       ;INkrementera/öka värdet i X-registret
 ADC #$c4  ;ADdera med Carry hexvärde c4 till A-registret
 BRK       ;BReaK - vi är klara
 {% include end.html %}
@@ -117,7 +117,8 @@ I simulatorn nedan **skriv in** (inte klistra in) följande kod:
     STA $01
     ADC $01
 
-{% include widget.html %}
+{% include start.html %}
+{% include end.html %}
 
 En viktig sak att notera här är skillnaden mellan `ADC #$01` och
 `ADC $01`. Den första adderar värdet `$01` till `A`-registret, men den
@@ -176,7 +177,7 @@ jämför det sedan med värdet `$03`.
 värde i `X`-registret med ett annat värde. Om de två värdena är lika,
 sätts `Z`-flaggan till `1`, annars sätts den till `0`.
 
-Nästa rad, `BNE decrement`, flyttar exekveringen till decrement-etiketten om
+Nästa rad, `BNE minska`, flyttar exekveringen till minska-etiketten om
 den så kallade `Z`-flaggan är satt till `0` (vilket betyder att de två värdena i `CPX`-jämförelsen
 inte var lika), annars gör den ingenting och vi lagrar `X` i `$0201`, och sen
 avslutar vi programmet.
