@@ -44,7 +44,7 @@ generateApplePosition:
   lda $fe
   sta $00
 
-  ;ladda in ett nytt slumpmässigt tal mellan 2 och 5 in i $01
+  ;ladda in ett nytt slumptal mellan 2 och 5 in i $01
   lda $fe
   and #$03 ;maska ut de 2 lägsta bitarna
   clc
@@ -148,7 +148,7 @@ maybeCollided:
 continueCollisionLoop:
   inx
   inx
-  cpx $03          ;gå till sista avsnittet utan kollision
+  cpx $03 ;gå till sista avsnittet utan kollision
   beq didntCollide
   jmp snakeCollisionLoop
 
