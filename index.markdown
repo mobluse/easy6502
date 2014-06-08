@@ -361,13 +361,13 @@ till den här adressen för att ge den slutliga adressen `$0704`.
 
 ###Övning###
 
-1. Försök att skriva kodsnuttar som använder sig av var och en av 6502-adresseringssätt. 
+1. Försök att skriva kodsnuttar som använder sig av var och en av 6502:s adresseringssätt. 
    Kom ihåg att du kan använda monitorn för att titta på en del av minnet.
 
 <h2 id='stack'>Stacken</h2>
 
-Stacken i en 6502-processor är precis som alla andra stackar (d.v.s. travar/högar) - värden läggs
-("pushas") på den och lyfts ("poppas", eller "pullas" i 6502-språkbruk) av den. Det aktuella djupet för
+Stacken i en 6502-processor är precis som alla andra stackar (d.v.s. travar/högar) - värden läggs/trycks
+("pushas") på den och lyfts/dras ("poppas", eller "pullas" i 6502-språkbruk) av den. Det aktuella djupet för
 stacken mäts av stackpekaren, ett särskilt register. Stacken bor i
 minnet mellan `$0100` och `$01ff`. Stackpekaren är initialt `$ff`, vilket
 pekar på minnesadress `$01ff`. När en byte skjuts på stacken, så blir
@@ -485,7 +485,7 @@ två raderna:
     jsr loop
 
 `init` och `loop` är bägge subrutiner. `init` initierar speltillståndet, och
-`loop` är den viktigaste spelslingan.
+`loop` är den viktiga spelslingan.
 
 Själva `loop`-subrutinen anropar bara ett antal subrutiner sekventiellt,
 innan den loopar tillbaka till sig själv:
@@ -521,7 +521,7 @@ och `$02`, skulle de hänvisa till den andra bildpunkten på skärmen (`$0201`
 
 De första två byten lagrar placeringen av äpplet. Denna uppdateras varje gång
 ormen äter äpplet. Byte `$02` innehåller den aktuella riktningen. `1` betyder
-upp, `2` höger, `4` ner, och `8` vänster. Resonemanget bakom dessa siffror kommer
+upp, `2` höger, `4` ner och `8` vänster. Resonemanget bakom dessa siffror kommer
 att framgå senare.
 
 Slutligen, byte `$03` innehåller den aktuella längden på ormen, i form av antal byte
