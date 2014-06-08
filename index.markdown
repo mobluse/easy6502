@@ -185,9 +185,10 @@ avslutar vi programmet.
 I assembler brukar man använda etiketter tillsammans med hoppinstruktioner. När
 en sådan assemblerats så omvandlas etiketten till en en-byte relativ förflyttning (ett
 antal byte att hoppa bakåt eller framåt från nästa instruktion) så
-hoppinstruktioner kan bara gå framåt och tillbaka runt 256 byte. Detta betyder att
+hoppinstruktioner som börjar på B (en. Branch, d.v.s. sv. förgrena) kan bara gå framåt och 
+tillbaka i ett intervall på 256 byte. Detta betyder att
 de endast kan användas för att förflytta sig omkring i lokal kod. För att förflytta längre måste du
-använda långhoppinstruktionerna.
+använda långhoppinstruktionerna som börjar på J (en. Jump, sv. hoppa).
 
 ###Övningar###
 
