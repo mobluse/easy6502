@@ -193,7 +193,8 @@ använda långhoppinstruktionerna som börjar på J (en. Jump, sv. hoppa).
 ###Övningar###
 
 1. Motsatsen till `BNE` är `BEQ`. Försök att skriva ett program som använder `BEQ`. 
-2. `BCC` och `BCS` ("hoppa om minnessiffran är nollställd" (en. "branch on carry clear") och "hoppa om minnessiffran är satt" (en. "branch on carry set")) används 
+2. `BCC` och `BCS` ("hoppa om minnessiffran är nollställd" (en. "branch on carry clear") och 
+   "hoppa om minnessiffran är satt" (en. "branch on carry set")) används 
    för att hoppa baserat på carry-flaggan. Skriv ett program som använder en av dessa två.
 
 <h2 id='addressing'>Adresseringssätt</h2>
@@ -735,14 +736,15 @@ noll igen. Den första `dex` slår runt, vilket gör `X` lika med `#$ff`.
 
 <h2 id="further">Gå vidare</h2>
 
-Hela detta avsnitt är författat av översättaren. 6502 är en tidig, populär processor från
+Hela detta avsnitt är författat av översättaren. Här finns
+ett [labyrintspel för Easy 6502](http://tklein23.github.io/easy6502/) på engelska.
+6502 är en tidig, populär processor från
 70-talet som också är liten: ca 3500 transistorer 
 ([Z80](http://sv.wikipedia.org/wiki/Zilog_Z80) har ca 8500; [i386](http://sv.wikipedia.org/wiki/Intel_80386), ca 275000; [ARMv7-A](http://en.wikipedia.org/wiki/ARM_Cortex-A9), ca 26000000). Man kan lätt få in en 6502 i en 
-[FPGA](http://sv.wikipedia.org/wiki/Field-programmable_gate_array)-krets, men jag vet inte om den är den bästa processorn i sin storleksklass för 
-FPGA. 
+[FPGA](http://sv.wikipedia.org/wiki/Field-programmable_gate_array)-krets, men jag vet inte om den är 
+den bästa processorn i sin storleksklass för FPGA. 
 
-
-Resurserna i detta stycket är på engelska. Hur som helst, anledningen till att jag valde 
+Resurserna i detta stycke är på engelska. Hur som helst, anledningen till att jag valde 
 att göra en resurs som lär ut 6502 var att jag hittade webbplatsen som jag översatte och 
 att processorn är väl utforskad på 
 t.ex. [http://www.visual6502.org/JSSim/](http://www.visual6502.org/JSSim/) 
