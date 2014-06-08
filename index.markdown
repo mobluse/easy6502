@@ -742,7 +742,7 @@ Hela detta avsnitt är författat av översättaren. 6502 är en tidig, populär
 FPGA. 
 
 
-Resurserna i detta stycker är på engelska. Hur som helst, anledningen till att jag valde 
+Resurserna i detta stycket är på engelska. Hur som helst, anledningen till att jag valde 
 att göra en resurs som lär ut 6502 var att jag hittade webbplatsen som jag översatte och 
 att processorn är väl utforskad på 
 t.ex. [http://www.visual6502.org/JSSim/](http://www.visual6502.org/JSSim/) 
