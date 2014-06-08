@@ -750,7 +750,7 @@ t.ex. [http://www.visual6502.org/JSSim/](http://www.visual6502.org/JSSim/)
 t.ex. [http://jbit.sourceforge.net/](http://jbit.sourceforge.net/)
 som finns för mobiler med J2ME/Java ME, datorer med Linux och Windows, m.fl. system, 
 se [https://github.com/efornara/jbit/wiki](https://github.com/efornara/jbit/wiki). 
-Dessutom kan man köpa en begagnad Commodore 64 (C64) inklusive bandspelare för endast ca 200 kr 
+Dessutom kan man köpa en begagnad Commodore 64 (C64/VIC64) inklusive bandspelare för endast ca 200 kr 
 på auktionswebbplatser. Man kan sedan använda en kassettadapter för bilstereo för 
 att överföra programmen från en PC:s hörlursutgång till C64:an.
 
