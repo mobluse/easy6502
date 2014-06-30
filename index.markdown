@@ -737,8 +737,9 @@ noll igen. Den första `dex` slår runt, vilket gör `X` lika med `#$ff`.
 <h2 id="further">Gå vidare</h2>
 
 Hela detta avsnitt är författat av översättaren. Här finns
-ett [labyrintspel för Easy 6502](http://tklein23.github.io/easy6502/) på engelska.
-6502 är en tidig, populär processor från
+ett [labyrintspel för Easy 6502](http://tklein23.github.io/easy6502/) på engelska och
+här finns [ännu fler program som fungerar i Easy 6502](http://www.6502asm.com/).
+[6502](http://sv.wikipedia.org/wiki/MOS_Technology_6502) är en tidig, populär processor från
 70-talet som också är liten: ca 3500 transistorer 
 ([Z80](http://sv.wikipedia.org/wiki/Zilog_Z80) har ca 8500; [i386](http://sv.wikipedia.org/wiki/Intel_80386), ca 275000; [ARMv7-A](http://en.wikipedia.org/wiki/ARM_Cortex-A9), ca 26000000). Man kan lätt få in en 6502 i en 
 [FPGA](http://sv.wikipedia.org/wiki/Field-programmable_gate_array)-krets, men jag vet inte om den är 
