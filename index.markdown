@@ -105,7 +105,7 @@ då på `A`- och `X`-registret. Något lite underligt händer på raden `ADC #$c
 Du förväntade dig kanske att lägga till `$c4` till `$c0` skulle ge `$184`, men denna
 processor ger resultatet som `$84`. Vad pågår här?
 
-Problemet är, `$184` är för stort för att passa i en enda byte (max är `$FF`),
+Problemet är, `$184` är för stort för att passa i en enda byte (max är `$ff`),
 och registren kan endast lagra en enda byte. Det är dock OK; processorn
 är faktiskt inte dum. Om du tittade tillräckligt noga, märkte du
 att carry-flaggan (d.v.s. minnessiffran) sattes till `1` efter denna operation. Så det är så du
@@ -579,7 +579,7 @@ ackumulatorn, och sätta de andra till noll. Detta konverterar ett tal i interva
 Efter detta adderas värdet `2` till ackumulatorn, för att skapa ett slutligt, slumpvist
 tal i området 2&ndash;5.
 
-Resultatet av denna subrutin är att ladda en slumpmässig byte i '$00', och ett slumpmässigt
+Resultatet av denna subrutin är att ladda en slumpmässig byte i `$00`, och ett slumpmässigt
 tal mellan 2 och 5 i `$01`. Eftersom den minst signifikanta byten kommer
 först med indirekt adressering, leder detta till en minnesadress mellan
 `$0200` och `$05ff`: det exakta intervallet som används för att rita på skärmen.
