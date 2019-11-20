@@ -58,7 +58,7 @@ Alltså, instruktionen `STA $0200` lagrar värdet för `A`-registret i minnesadd
 `$0200` (STore A i adressen `$0200`). Klicka **Step** ytterligare fyra gånger för att utföra resten av
 instruktionerna, och håll ett öga på `A`-registret, ty det ändrar sig.
 
-###Övningar###
+### Övningar
 
 1. Försök att ändra färgen på de tre pixlarna. 
 2. Ändra en av bildpunkterna (d.v.s. pixlarna) så att den ritas i det nedre högra hörnet (adress `$05ff`).
@@ -140,7 +140,7 @@ bägge sidorna enär de har sina styrkor och svagheter). Dessa sidor anger
 argument till varje instruktion, vilka register de använder, och vilka flaggor som de
 sätter. De är din bibel.
 
-###Övningar###
+### Övningar
 
 1. Du har sett `TAX`  Du kan nog gissa vad `TAY`, `TXA` och `TYA` gör,
    men skriv lite kod för att testa dina antaganden.
@@ -190,7 +190,7 @@ tillbaka i ett intervall på 256 byte. Detta betyder att
 de endast kan användas för att förflytta sig omkring i lokal kod. För att förflytta längre måste du
 använda långhoppinstruktionerna som börjar på J (en. Jump, sv. hoppa).
 
-###Övningar###
+### Övningar
 
 1. Motsatsen till `BNE` är `BEQ`. Försök att skriva ett program som använder `BEQ`. 
 2. `BCC` och `BCS` ("hoppa om minnessiffran är nollställd" (en. "branch on carry clear") och 
@@ -210,13 +210,13 @@ visas från den adressen. Båda dessa är hex-värden.
 Till exempel, för att visa 16 byte minne från `$c000`, ange `c000` och `10` 
 i **Start** respektive **Length**.
 
-###Absolut: `$c000`###
+### Absolut: `$c000`
 
 Med absolut adressering, används den fullständiga minnesadressen som argument till instruktionen. Till exempel:
 
     STA $c000 ;Lagra värdet i ackumulatorn på minnesadress $c000
 
-###Noll-sida: `$c0`###
+### Noll-sida: `$c0`
 
 Alla instruktioner som stödjer absolut adressering (med undantag för långhoppinstruktionerna) 
 har också möjlighet att ta en en-byte adress. Denna typ av
@@ -224,7 +224,7 @@ adressering kallas "noll-sida" - bara den första sidan (de första 256 byte) av
 minnet är tillgängligt. Detta är snabbare, eftersom endast en byte behöver slås upp,
 och tar även upp mindre plats i den assemblerade koden (d.v.s. maskinkoden).
 
-###Noll-sida,X: `$c0,X`###
+### Noll-sida,X: `$c0,X`
 
 Det är här som adressering blir intressant. I detta läge är en nollsidesadress given, och sedan läggs värdet för `X`-registret till. Här är ett exempel:  
 
@@ -239,25 +239,25 @@ Om resultatet av additionen är större än en enda byte, så går adressen runt
     LDX #$05
     STA $ff,X  ;Lagra värdet av A i minnesadress $04
 
-###Noll-sida,Y: `$c0,Y`###
+### Noll-sida,Y: `$c0,Y`
 
 Detta motsvarar noll-sida,X, men kan bara användas med `LDX` och `STX`.
 
-###Absolut,X och absolut,Y: `$c000,X` och `$c000,Y`###
+### Absolut,X och absolut,Y: `$c000,X` och `$c000,Y`
 
 Dessa är absolutadresseringsversionerna av noll-sida,X och noll-sida,Y. Till exempel: 
 
     LDX #$01 
     STA $0200,X ;Lagra värdet av A på minnesadress $0201
 
-###Omedelbar: `#$c0`###
+### Omedelbar: `#$c0`
 
 Omedelbar adressering handlar inte direkt om minnesadresser - detta är det 
 adresseringssätt där faktiska värden används. Till exempel, `LDX #$01` laddar värdet 
 `$01` i `X`-registret. Det är väldigt annorlunda jämfört med noll-sideinstruktionen 
 `LDX $01` som läser in värdet från minnesadress `$01` i `X`-registret.
 
-###Relativ: `$c0` (eller etikett)###
+### Relativ: `$c0` (eller etikett)
 
 Relativ adressering används för hoppinstruktioner. Dessa instruktioner tar
 en enda byte, som används som en förskjutning från den följande instruktionen.
@@ -286,13 +286,13 @@ så att `STA` tar en två-byte absolut adress i stället för en enda byte noll-
 hexdumpen igen (klicka på **Hexdump**) - argumentet till `BNE` ska nu vara `03`, eftersom
 instruktionen som processorn skall hoppa över nu är tre byte lång.
 
-###Implicit###
+### Implicit
 
 Vissa instruktioner hanterar inte minnesadresser (t.ex. `INX` - öka (d.v.s. inkrementera)
 `X`-registret). Dessa sägs ha implicit (eller underförstådd) adressering - argumentet 
 är inbyggt i instruktionen.
 
-###Indirekt: `($c000)`###
+### Indirekt: `($c000)`
 
 Indirekt adressering använder en absolut adress för att slå upp en annan adress. Den 
 första adressen ger den minst signifikanta byten i adressen, och 
@@ -314,7 +314,7 @@ adressen `$cc01`, som blir den nya programräknaren. Assemblera och stega
 igenom programmet ovan för att se vad som händer. Jag ska prata mer om `JMP` i
 avsnittet om [Långa hopp](#jumping).
 
-###Indexerad indirekt: `($c0,X)`###
+### Indexerad indirekt: `($c0,X)`
 
 Den här är ganska konstig. Det är som en korsning mellan noll-sida,X och indirekt. 
 I grund och botten tar du noll-sidans adress, lägger till värdet av `X`-registret, 
@@ -340,7 +340,7 @@ i i den tidigare instruktionen, så `A`-registret får samma
 värde som `Y`, om än genom en omfattande omväg. Du kommer inte att se denna 
 ofta.
 
-###Indirekt indexerad: `($c0),Y`###
+### Indirekt indexerad: `($c0),Y`
 
 Indirekt indexerad är som indexerad indirekt men mindre galen. I stället för att addera
 `X`-registret till adressen *innan* avreferering, så avrefereras noll-sidans adress, 
@@ -361,7 +361,7 @@ I detta fall, `($01)` slår upp de två byten i `$01` och `$02`: `$03` och
 `$07`. Dessa utgör adressen `$0703`. Värdet på `Y`-registret läggs 
 till den här adressen för att ge den slutliga adressen `$0704`.
 
-###Övning###
+### Övning
 
 1. Försök att skriva kodsnuttar som använder sig av var och en av 6502:s adresseringssätt. 
    Kom ihåg att du kan använda monitorn för att titta på en del av minnet.
@@ -412,7 +412,7 @@ använder etiketter och assembleraren räknar ut rätt minnesadress med hjälp a
 etiketten. För större program är dock långa hopp det enda sättet att flytta körningen från en 
 del av koden till en annan.
 
-###JMP###
+### JMP
 
 `JMP` är ett ovillkorligt långt hopp (en. JuMP). Här är ett mycket enkelt exempel för att visa det i aktion:
 
@@ -426,7 +426,7 @@ dit:
    STA $0200 
 {% include end.html %}
 
-###JSR/RTS###
+### JSR/RTS
 
 `JSR` och `RTS` ("hopp (en. Jump) till SubRutin" och "ReTur från Subrutin/underprogram") är en
 dynamisk duo som man brukar se tillsammans. `JSR` används för att hoppa från
@@ -478,7 +478,7 @@ i den för fler detaljförklaringar.
 
 {% include snake.html %}
 
-###Övergripande struktur###
+### Övergripande struktur
 
 Efter det första blocket med kommentarer (rader som börjar med semikolon), så är de första
 två raderna:
@@ -510,7 +510,7 @@ processorn att göra en del fördröjningsarbete, för att hindra spelet från a
 på det som ett sov-kommando. Spelet fortsätter att köra tills ormen kolliderar
 med väggen eller med sig själv.
 
-###Hur nollsidan används###
+### Hur nollsidan används
 
 Minnets nollsida används för att lagra ett antal speltillståndsvariabler, som
 noteras i kommentarssektionen överst i spelet. Allt i `$00`, `$01`
@@ -529,7 +529,7 @@ att framgå senare.
 Slutligen, byte `$03` innehåller den aktuella längden på ormen, i form av antal byte
 i minnet vid adressen `$10` (så att en längd på 4 betyder 2 bildpunkter).
 
-###Initialisera###
+### Initialisera
 
 `init`-subrutinen anropar två subrutiner: `initSnake` och
 `generateApplePosition`. `initSnake` ställer in ormens riktning, längd och
@@ -584,13 +584,13 @@ tal mellan 2 och 5 i `$01`. Eftersom den minst signifikanta byten kommer
 först med indirekt adressering, leder detta till en minnesadress mellan
 `$0200` och `$05ff`: det exakta intervallet som används för att rita på skärmen.
 
-###Spel-loopen###
+### Spel-loopen
 
 Nästan alla spel har i sin kärna en spel-loop. Alla spel-loopar har samma 
 grundläggande form: acceptera användarinmatning, uppdatera speltillståndet, och rita 
 speltillståndet. Denna loop är inte annorlunda.
 
-####Läs inmatningen####
+#### Läs inmatningen
 
 Den första subrutinen, `readKeys`, tar på sig jobbet att acceptera användarinmatningen. 
 Minnesadressen `$ff` lagrar ASCII-koden för den senaste knapptryckningen i denna
@@ -620,7 +620,7 @@ vara noll. `BNE` betyder "hoppa om nollflaggan är nollställd", så i detta fal
 hoppa till `illegalMove`, som bara återvänder från subrutinen. Annars
 lagras den nya riktningen (1 i detta fall) på den avsedda minnesadressen.
 
-####Uppdatera speltillståndet####
+#### Uppdatera speltillståndet
 
 Nästa subrutin, `checkCollision`,  anropar `checkAppleCollision` och 
 `checkSnakeCollision`. `checkAppleCollision` bara kontrollerar om de två 
@@ -713,7 +713,7 @@ nedan visa hur maskering av de lägsta 5 bitarna avslöja om ett tal
 Jag kommer inte att förklara ingående hur varje riktning fungerar, men
 förklaringen ovan bör ge dig tillräckligt för att kunna reda ut det med lite iakttagelser.
 
-####Rita upp spelet####
+#### Rita upp spelet
 
 Eftersom speltillståndet lagras i termer av pixeladresser, är uppritningen av
 spelet mycket enkel. Den första subrutinen, `drawApple`, är extremt
